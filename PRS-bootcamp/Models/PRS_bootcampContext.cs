@@ -20,5 +20,15 @@ namespace PRS_bootcamp.Models
         }
 
         public System.Data.Entity.DbSet<PRS_bootcamp.Models.User> Users { get; set; }
+
+        public System.Data.Entity.DbSet<PRS_bootcamp.Models.Vendor> Vendors { get; set; }
+
+        public System.Data.Entity.DbSet<PRS_bootcamp.Models.Product> Products { get; set; }
+
+        public System.Data.Entity.DbSet<PRS_bootcamp.Models.PurchaseRequest> PurchaseRequests { get; set; }
+
+        public System.Data.Entity.DbSet<PRS_bootcamp.Models.Status> Status { get; set; }
+
+        public System.Data.Entity.DbSet<PRS_bootcamp.Models.PurchaseRequestLineItem> PurchaseRequestLineItems { get; set; }
     }
 }

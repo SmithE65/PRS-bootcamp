@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace PRS_bootcamp.Models
+{
+    public class Vendor
+    {
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string Code { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string Address { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string City { get; set; }
+
+        [Required]
+        [StringLength(2)]
+        public string State { get; set; }
+
+        [Required]
+        [StringLength(5)]
+        public string Zip { get; set; }
+
+        [Required]
+        [StringLength(12)]
+        public string Phone { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string Email { get; set; }
+
+        public bool IsPreapproved { get; set; }
+
+        public bool IsActive { get; set; }
+
+        [Required]
+        public DateTime DateCreated { get; set; }
+
+        [Required]
+        public DateTime DateUpdated { get; set; }
+
+        public int UpdatedByUser { get; set; }
+        public User User { get; set; }
+    }
+}

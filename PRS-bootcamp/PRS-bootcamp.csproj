@@ -172,6 +172,18 @@
     <Compile Include="Migrations\201710031544428_User UserName made unique.Designer.cs">
       <DependentUpon>201710031544428_User UserName made unique.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710031757492_Vendor Code made unique.cs" />
+    <Compile Include="Migrations\201710031757492_Vendor Code made unique.Designer.cs">
+      <DependentUpon>201710031757492_Vendor Code made unique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710031811120_Product VendorPartNumber made unique.cs" />
+    <Compile Include="Migrations\201710031811120_Product VendorPartNumber made unique.Designer.cs">
+      <DependentUpon>201710031811120_Product VendorPartNumber made unique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710031820579_Product Photopath not required.cs" />
+    <Compile Include="Migrations\201710031820579_Product Photopath not required.Designer.cs">
+      <DependentUpon>201710031820579_Product Photopath not required.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\PRS_bootcampContext.cs" />
@@ -181,6 +193,9 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\JsonNetResult.cs" />
+    <Compile Include="Utilities\JsonReturnMessage.cs" />
+    <Compile Include="Utilities\Msg.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -272,6 +287,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710031544428_User UserName made unique.resx">
       <DependentUpon>201710031544428_User UserName made unique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710031757492_Vendor Code made unique.resx">
+      <DependentUpon>201710031757492_Vendor Code made unique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710031811120_Product VendorPartNumber made unique.resx">
+      <DependentUpon>201710031811120_Product VendorPartNumber made unique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710031820579_Product Photopath not required.resx">
+      <DependentUpon>201710031820579_Product Photopath not required.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

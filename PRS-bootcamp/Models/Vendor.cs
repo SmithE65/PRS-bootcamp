@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +13,7 @@ namespace PRS_bootcamp.Models
 
         [Required]
         [StringLength(10)]
+        [Index(IsUnique = true)]
         public string Code { get; set; }
 
         [Required]

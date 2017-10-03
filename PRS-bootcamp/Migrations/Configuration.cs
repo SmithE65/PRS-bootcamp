@@ -39,11 +39,19 @@ namespace PRS_bootcamp.Migrations
                 new Vendor { Code = "WAL", Name = "Wal-Mart", Address = "address", City = "city", State = "st", Zip = "12345", Phone = "555-555-5555", Email = "email-address" }
                 );
 
-            context.Products.AddOrUpdate(p => p.Id,
+            context.Products.AddOrUpdate(p => p.Name,
                 new Product { VendorId = 1, VendorPartNumber = "1", Name = "Part1", Price = 2, Unit = "Ea." },
                 new Product { VendorId = 2, VendorPartNumber = "1", Name = "Part2", Price = 2, Unit = "Ea." },
                 new Product { VendorId = 2, VendorPartNumber = "2", Name = "Part3", Price = 2, Unit = "Ea." },
                 new Product { VendorId = 1, VendorPartNumber = "2", Name = "Part4", Price = 2, Unit = "Ea." }
+                );
+
+            context.Status.AddOrUpdate(s => s.Description,
+                new Status { Description = "STATUS" }
+                );
+
+            context.PurchaseRequests.AddOrUpdate(p => p.Description,
+                new PurchaseRequest { UserId = 1, Description = "desc1", Justification = "just", DateNeeded = DateTime.Now.AddDays(7), DeliveryMode = "Santa", StatusId = 1, SubmittedDate = DateTime.Now, Total = 0 }
                 );
         }
     }

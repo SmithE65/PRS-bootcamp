@@ -63,6 +63,7 @@ namespace PRS_bootcamp.Controllers
             return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
         }
 
+#region MVC_Actions
         // GET: Users
         public ActionResult Index()
         {
@@ -163,6 +164,7 @@ namespace PRS_bootcamp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+#endregion
 
         protected override void Dispose(bool disposing)
         {

@@ -34,7 +34,6 @@ namespace PRS_bootcamp.Models
 
         public DateTime SubmittedDate { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string ReasonForRejection { get; set; }
     }

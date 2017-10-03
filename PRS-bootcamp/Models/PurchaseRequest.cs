@@ -37,15 +37,5 @@ namespace PRS_bootcamp.Models
         [Required]
         [StringLength(100)]
         public string ReasonForRejection { get; set; }
-
-        public bool IsActive { get; set; }
-
-        [Required]
-        public DateTime DateCreated { get; set; }
-
-        [Required]
-        public DateTime DateUpdated { get; set; }
-
-        public int UpdatedByUser { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace PRS_bootcamp.Migrations
                         IsActive = c.Boolean(nullable: false),
                         DateCreated = c.DateTime(nullable: false),
                         DateUpdated = c.DateTime(nullable: false),
-                        UpdatedByUser = c.Int(nullable: false),
+                        UpdatedByUser = c.Int(),
                         User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -63,7 +63,7 @@ namespace PRS_bootcamp.Migrations
                         IsActive = c.Boolean(nullable: false),
                         DateCreated = c.DateTime(nullable: false),
                         DateUpdated = c.DateTime(nullable: false),
-                        UpdatedByUser = c.Int(nullable: false),
+                        UpdatedByUser = c.Int(),
                         User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -102,7 +102,7 @@ namespace PRS_bootcamp.Migrations
                         IsActive = c.Boolean(nullable: false),
                         DateCreated = c.DateTime(nullable: false),
                         DateUpdated = c.DateTime(nullable: false),
-                        UpdatedByUser = c.Int(nullable: false),
+                        UpdatedByUser = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Status", t => t.StatusId, cascadeDelete: true)
@@ -119,7 +119,7 @@ namespace PRS_bootcamp.Migrations
                         IsActive = c.Boolean(nullable: false),
                         DateCreated = c.DateTime(nullable: false),
                         DateUpdated = c.DateTime(nullable: false),
-                        UpdatedByUser = c.Int(nullable: false),
+                        UpdatedByUser = c.Int(),
                         User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)

@@ -43,16 +43,5 @@ namespace PRS_bootcamp.Models
         public string Email { get; set; }
 
         public bool IsPreapproved { get; set; }
-
-        public bool IsActive { get; set; }
-
-        [Required]
-        public DateTime DateCreated { get; set; }
-
-        [Required]
-        public DateTime DateUpdated { get; set; }
-
-        public int UpdatedByUser { get; set; }
-        public User User { get; set; }
     }
 }

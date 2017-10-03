@@ -13,7 +13,7 @@ namespace PRS_bootcamp.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201710021822498_Models added"; }
+            get { return "201710021857015_Models added"; }
         }
         
         string IMigrationMetadata.Source

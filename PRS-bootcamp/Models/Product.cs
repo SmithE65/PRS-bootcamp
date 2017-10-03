@@ -32,16 +32,5 @@ namespace PRS_bootcamp.Models
         [Required]
         [StringLength(50)]
         public string Photopath { get; set; }
-
-        public bool IsActive { get; set; }
-
-        [Required]
-        public DateTime DateCreated { get; set; }
-
-        [Required]
-        public DateTime DateUpdated { get; set; }
-
-        public int UpdatedByUser { get; set; }
-        public User User { get; set; }
     }
 }

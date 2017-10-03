@@ -13,16 +13,5 @@ namespace PRS_bootcamp.Models
         [Required]
         [StringLength(20)]
         public string Description { get; set; }
-
-        public bool IsActive { get; set; }
-
-        [Required]
-        public DateTime DateCreated { get; set; }
-
-        [Required]
-        public DateTime DateUpdated { get; set; }
-
-        public int UpdatedByUser { get; set; }
-        public User User { get; set; }
     }
 }

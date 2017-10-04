@@ -238,36 +238,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Vendors\Create.cshtml" />
-    <Content Include="Views\Vendors\Delete.cshtml" />
-    <Content Include="Views\Vendors\Details.cshtml" />
-    <Content Include="Views\Vendors\Edit.cshtml" />
-    <Content Include="Views\Vendors\Index.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
-    <Content Include="Views\Products\Details.cshtml" />
-    <Content Include="Views\Products\Edit.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\PurchaseRequests\Create.cshtml" />
-    <Content Include="Views\PurchaseRequests\Delete.cshtml" />
-    <Content Include="Views\PurchaseRequests\Details.cshtml" />
-    <Content Include="Views\PurchaseRequests\Edit.cshtml" />
-    <Content Include="Views\PurchaseRequests\Index.cshtml" />
-    <Content Include="Views\PurchaseRequestLineItems\Create.cshtml" />
-    <Content Include="Views\PurchaseRequestLineItems\Delete.cshtml" />
-    <Content Include="Views\PurchaseRequestLineItems\Details.cshtml" />
-    <Content Include="Views\PurchaseRequestLineItems\Edit.cshtml" />
-    <Content Include="Views\PurchaseRequestLineItems\Index.cshtml" />
-    <Content Include="Views\Status\Create.cshtml" />
-    <Content Include="Views\Status\Delete.cshtml" />
-    <Content Include="Views\Status\Details.cshtml" />
-    <Content Include="Views\Status\Edit.cshtml" />
-    <Content Include="Views\Status\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

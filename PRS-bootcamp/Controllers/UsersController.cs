@@ -21,7 +21,8 @@ namespace PRS_bootcamp.Controllers
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
-                db.SaveChanges();
+                int numChanges = db.SaveChanges();
+                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." });
             }
 
             return Json(new Msg { Result = "Error", Message = "ModelState invalid" });

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { User } from '../models/user';
-import { Http } from "@angular/http";
+import { UserService } from '../services/user.service';
 
 
-interface UserResponse {
-    user: User;
-}
+//interface UserResponse {
+//    user: User;
+//}
 
 @Component({
   selector: 'app-login',
@@ -17,25 +18,29 @@ export class LoginComponent implements OnInit {
 
     username: string = "";
     password: string = "";
+    message: string = "";
 
     user: User;
 
     login(): void {
-        let params = "username=" + this.username + "&password=" + this.password;
+        this.message = "";
 
-        this.http.get("http://localhost:51910/Users/Login?" + params).subscribe(data => this.checkData(data));
+        this.userService.login(this.username, this.password).then(data => this.checkData(data));
     }
 
-    checkData(data: any): void {
-        if (data.text().length == 0)
+    checkData(users: User[]): void {
+        if (users.length == 0)
+        {
             console.log("Error: no data");
+            this.message = "Invalid User Name / Password combination.";
+        }
         else {
-            console.log(data.json());
-            this.user = data.json();
+            console.log(users);
+            this.user = users[0];
         }
     }
  
-  constructor(private http: Http) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
       //this.http

@@ -45,14 +45,9 @@ namespace PRS_bootcamp.Controllers
 
         public ActionResult Login(string UserName, string Password)
         {
-            User user = db.Users.SingleOrDefault(u => u.UserName == UserName && u.Password == Password);
+            db.Users.Where(u => u.UserName == UserName && u.Password == Password);
 
-            if (user != null)
-            {
-                return new JsonNetResult { Data = user };
-            }
-
-            return Json(new Msg { Result = "Error", Message = $"Something went wrong. {UserName} {Password}" }, JsonRequestBehavior.AllowGet);
+            return new JsonNetResult { Data = db.Users.ToList() };
         }
 
         public ActionResult Remove(int? id)

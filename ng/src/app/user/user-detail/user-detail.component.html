@@ -1,0 +1,35 @@
+<p>
+  user-detail works!
+</p>
+<div class="container">
+  <table class="table table-bordered table-striped" *ngIf="user">
+    <tr>
+      <th>User Id</th>
+      <td>{{user.Id}}</td>
+    </tr>
+    <tr>
+      <th>Username</th>
+      <td>{{user.UserName}}</td>
+    </tr>
+    <tr>
+      <th>User Name</th>
+      <td>{{user.FirstName}} {{user.LastName}}</td>
+    </tr>
+    <tr>
+      <th>Phone</th>
+      <td>{{user.Phone}}</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{user.Email}}</td>
+    </tr>
+    <tr>
+      <th>Reviewer</th>
+      <td>{{user.IsReviewer}}</td>
+    </tr>
+    <tr>
+      <th>Admin</th>
+      <td>{{user.IsAdmin}}</td>
+    </tr>
+  </table>
+</div>

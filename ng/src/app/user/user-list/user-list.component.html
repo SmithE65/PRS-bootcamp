@@ -1,0 +1,32 @@
+<p>
+  user-list works!
+</p>
+
+<div class="container-fluid">
+  <table class="table table-striped table-bordered" *ngIf="users">
+    <thead>
+      <tr class="bg-primary">
+        <td>Username</td>
+        <td>User Name</td>
+        <td>Phone</td>
+        <td>Email</td>
+        <td>Admin</td>
+        <td>Reviewer</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.UserName}}</td>
+        <td>{{user.FirstName}} {{user.LastName}}</td>
+        <td>{{user.Phone}}</td>
+        <td>{{user.Email}}</td>
+        <td *ngIf="user.IsAdmin">True</td>
+        <td *ngIf="!user.IsAdmin">False</td>
+        <td *ngIf="user.IsReviewer">True</td>
+        <td *ngIf="!user.IsReviewer">False</td>
+        <td><a routerLink="/users/detail/{{user.Id}}">Detail</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

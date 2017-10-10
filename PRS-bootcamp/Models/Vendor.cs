@@ -45,5 +45,18 @@ namespace PRS_bootcamp.Models
         public string Email { get; set; }
 
         public bool IsPreapproved { get; set; }
+
+        public void Copy(Vendor vendor)
+        {
+            Code = vendor.Code;
+            Name = vendor.Name;
+            Address = vendor.Address;
+            City = vendor.City;
+            State = vendor.State;
+            Zip = vendor.Zip;
+            Phone = vendor.Phone;
+            Email = vendor.Email;
+            IsPreapproved = vendor.IsPreapproved;
+        }
     }
 }

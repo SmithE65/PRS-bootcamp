@@ -10,6 +10,39 @@ namespace PRS_bootcamp.Controllers
         private PRS_bootcampContext db = new PRS_bootcampContext();
         private const string bind = "Id,PurchaseRequestId,ProductId,Quantity";
 
+        public ActionResult UpdateTotal(int? id)
+        {
+            if (id == null || id <= 0)
+            {
+                return Json(new Msg { Result = "Error", Message = "Invalid id." }, JsonRequestBehavior.AllowGet);
+            }
+
+            var purchaseRequest = db.PurchaseRequests.Find(id);
+
+            if (purchaseRequest == null)
+            {
+                return Json(new Msg { Result = "Error", Message = $"No PurchaseRequest found for id: {id}" }, JsonRequestBehavior.AllowGet);
+            }
+
+            var lineItems = db.PurchaseRequestLineItems.Where(p => p.PurchaseRequestId == purchaseRequest.Id).ToList();
+
+            decimal total = 0;
+            foreach (var item in lineItems)
+            {
+                total += item.Product.Price * item.Quantity;
+            }
+            purchaseRequest.Total = total;
+
+            int numChanged = 0;
+            if (ModelState.IsValid)
+            {
+                db.Entry(purchaseRequest).State = System.Data.Entity.EntityState.Modified;
+                numChanged = db.SaveChanges();
+            }
+
+            return Json(new Msg { Result = "Success", Message = $"{numChanged} record(s) changed with total: {total}" }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Add([Bind(Include = bind)] PurchaseRequestLineItem purchaseRequestLineItem)
         {
             if (ModelState.IsValid)

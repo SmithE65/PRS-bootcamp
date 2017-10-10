@@ -41,5 +41,18 @@ namespace PRS_bootcamp.Models
 
         [Required]
         public bool IsReviewer { get; set; }
+
+        public void Copy(User user)
+        {
+            Id = user.Id;
+            UserName = user.UserName;
+            Password = user.Password;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            Phone = user.Phone;
+            Email = user.Email;
+            IsAdmin = user.IsAdmin;
+            IsReviewer = user.IsReviewer;
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace PRS_bootcamp.Models
         public int VendorId { get; set; }
 
         [Required]
-        public Vendor Vendor { get; set; }
+        public virtual Vendor Vendor { get; set; }
 
         [Required]
         [StringLength(50)]

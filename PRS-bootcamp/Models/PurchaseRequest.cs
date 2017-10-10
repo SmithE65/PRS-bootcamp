@@ -11,7 +11,7 @@ namespace PRS_bootcamp.Models
         public int Id { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -28,7 +28,7 @@ namespace PRS_bootcamp.Models
         public string DeliveryMode { get; set; }
 
         public int StatusId { get; set; }
-        public Status Status { get; set; }
+        public virtual Status Status { get; set; }
 
         public decimal Total { get; set; }
 

@@ -5,6 +5,27 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRS-bootcamp", "PRS-bootcamp\PRS-bootcamp.csproj", "{3C2CED93-74DF-46CF-8888-CBE8CCEA1CAA}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ng", "ng\", "{BB5DB6D5-34F9-40E2-9F7E-E725379E4363}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_54972"
+		Debug.AspNetCompiler.PhysicalPath = "ng\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54972\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_54972"
+		Release.AspNetCompiler.PhysicalPath = "ng\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54972\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "54972"
+		SlnRelativePath = "ng\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +36,10 @@ Global
 		{3C2CED93-74DF-46CF-8888-CBE8CCEA1CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C2CED93-74DF-46CF-8888-CBE8CCEA1CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C2CED93-74DF-46CF-8888-CBE8CCEA1CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB5DB6D5-34F9-40E2-9F7E-E725379E4363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB5DB6D5-34F9-40E2-9F7E-E725379E4363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB5DB6D5-34F9-40E2-9F7E-E725379E4363}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB5DB6D5-34F9-40E2-9F7E-E725379E4363}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

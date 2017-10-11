@@ -25,8 +25,13 @@
         <td *ngIf="!user.IsAdmin">False</td>
         <td *ngIf="user.IsReviewer">True</td>
         <td *ngIf="!user.IsReviewer">False</td>
-        <td><a routerLink="/users/detail/{{user.Id}}">Detail</a></td>
+        <td>
+          <a routerLink="/users/detail/{{user.Id}}">Detail</a>
+          |
+          <a routerLink="/users/edit/{{user.Id}}">Edit</a>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
+<a routerLink="/users/add">Create New</a>

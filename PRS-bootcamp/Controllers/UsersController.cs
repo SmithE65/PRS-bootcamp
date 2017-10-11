@@ -17,22 +17,22 @@ namespace PRS_bootcamp.Controllers
             {
                 db.Users.Add(user);
                 int numChanges = db.SaveChanges();
-                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." });
+                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new Msg { Result = "Error", Message = "ModelState invalid" });
+            return Json(new Msg { Result = "Error", Message = "Add: ModelState invalid" });
         }
 
         public ActionResult Get(int? id)
         {
-            if (id == null)
-                return Json(new Msg { Result = "Failed", Message = "ID is null" });
+            if (id == null || id <= 0)
+                return Json(new Msg { Result = "Error", Message = "Get: id either null or invalid" });
 
             User user = db.Users.Find(id);
 
             if (user == null)
             {
-                return Json(new Msg { Result = "Failed", Message = $"No user found with id: {id}." });
+                return Json(new Msg { Result = "Error", Message = $"Get: invalid user id: {id}." }, JsonRequestBehavior.AllowGet);
             }
 
             return new JsonNetResult { Data = user };
@@ -45,39 +45,37 @@ namespace PRS_bootcamp.Controllers
 
         public ActionResult Login(string UserName, string Password)
         {
-            db.Users.Where(u => u.UserName == UserName && u.Password == Password);
-
-            return new JsonNetResult { Data = db.Users.ToList() };
+            return new JsonNetResult { Data = db.Users.Where(u => u.UserName == UserName && u.Password == Password).ToList() };
         }
 
         public ActionResult Remove(int? id)
         {
             if (id == null || id <= 0)
-                return Json(new Msg { Result = "Error", Message = "id either null or invalid" });
+                return Json(new Msg { Result = "Error", Message = "Remove: id either null or invalid" });
 
             User user = db.Users.Find(id);
 
             if (user == null)
-                return Json(new Msg { Result = "Error", Message = "Invalid user id." });
+                return Json(new Msg { Result = "Error", Message = "Remove: invalid user id." });
 
             db.Users.Remove(user);
             int numChanges = db.SaveChanges();
 
-            return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
+            return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Update([Bind(Include = bind)] User user)
         {
             if (user == null)
             {
-                return Json(new Msg { Result = "Error", Message = "User cannot be null." });
+                return Json(new Msg { Result = "Error", Message = "Update: user cannot be null." });
             }
 
             User dbUser = db.Users.Find(user.Id);
 
             if (dbUser == null)
             {
-                return Json(new Msg { Result = "Error", Message = $"Invalid id: {user.Id}" }, JsonRequestBehavior.AllowGet);
+                return Json(new Msg { Result = "Error", Message = $"Update: invalid id: {user.Id}" }, JsonRequestBehavior.AllowGet);
             }
             dbUser.Copy(user);
 
@@ -88,7 +86,7 @@ namespace PRS_bootcamp.Controllers
                 return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new Msg { Result = "Error", Message = $"ModelState invalid; {numChanges} record(s) updated." });
+            return Json(new Msg { Result = "Error", Message = $"ModelState invalid; {numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
         }
         
         protected override void Dispose(bool disposing)

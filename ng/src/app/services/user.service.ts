@@ -16,20 +16,22 @@ export class UserService {
 
   login(username: string, password: string): Promise<User[]>
   {
-      let url = urlBase + "Login?username=" + username + "$password=" + password;
+      let url = urlBase + "Users/Login?username=" + username + "&password=" + password;
 
       return this.http.get(url).toPromise().then(resp => resp.json() as User[]).catch(this.handleError);
   }
 
-  //add(user: User): Promise<User>
-  //{
+  add(user: User): Promise<any>
+  {
+      let url = urlBase + "Users/Add";
+      return this.http.post(url, user).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
+  }
 
-  //}
-
-  //delete(id: number): Promise<any>
-  //{
-
-  //}
+  delete(id: number): Promise<any>
+  {
+      let url = urlBase + "Users/Remove/" + id;
+      return this.http.get(url).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
+  }
 
   get(id): Promise<User>
   {
@@ -45,10 +47,11 @@ export class UserService {
       return this.http.get(url).toPromise().then(resp => resp.json() as User[]).catch(this.handleError);
   }
 
-  //update(user: User): Promise<any>
-  //{
-
-  //}
+  update(user: User): Promise<any>
+  {
+      let url = urlBase + "Users/Update";
+      return this.http.post(url, user).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
+  }
 
   private handleError(error: any): Promise<any>
   {

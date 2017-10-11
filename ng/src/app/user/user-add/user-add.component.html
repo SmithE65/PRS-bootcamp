@@ -1,0 +1,41 @@
+<p>
+  user-add works!
+</p>
+
+<div class="container" *ngIf="user">
+  <form class="form form-horizontal" style="margin:20px;">
+    <div class="form-group">
+      <label class="form-control-label col-sm-3" for="edit-username">Username</label>
+      <input class="form-control col-sm-9" id="edit-username" type="text" name="UserName" [(ngModel)]="user.UserName" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label col-sm-2">Password</label>
+      <input class="form-control col-sm-9" id="edit-password" type="password" name="Password" [(ngModel)]="user.Password" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label col-sm-2">First Name</label>
+      <input class="form-control col-sm-9" id="edit-firstname" type="text" name="FirstName" [(ngModel)]="user.FirstName" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label col-sm-2">Last Name</label>
+      <input class="form-control col-sm-9" id="edit-lastname" type="text" name="LastName" [(ngModel)]="user.LastName" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label col-sm-2">Phone</label>
+      <input class="form-control col-sm-9" id="edit-phone" type="tel" name="Phone" [(ngModel)]="user.Phone" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label col-sm-2">Email</label>
+      <input class="form-control col-sm-9" id="edit-email" type="email" name="Email" [(ngModel)]="user.Email" />
+    </div>
+    <div class="form-group">
+      <label><input id="edit-isadmin" type="checkbox" name="IsAdmin" [(ngModel)]="user.IsAdmin" />Is Admin</label>
+    </div>
+    <div class="form-group">
+      <label><input id="edit-isreviewer" type="checkbox" name="IsReviewer" [(ngModel)]="user.IsReviewer" />Is Reviewer</label>
+    </div>
+    <div class="form-group" style="margin-top:15px;">
+      <button class="btn" (click)="add()">Add</button>
+    </div>
+  </form>
+</div>

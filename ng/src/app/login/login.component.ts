@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import { SystemService } from '../services/system.service';
 
 
 //interface UserResponse {
@@ -26,6 +27,15 @@ export class LoginComponent implements OnInit {
         this.message = "";
 
         this.userService.login(this.username, this.password).then(data => this.checkData(data));
+        
+    }
+
+    logout(): void
+    {
+        this.systemService.currentUser = null;
+        this.systemService.loggedIn = false;
+        this.systemService.delete();
+        this.router.navigate(['/login']);
     }
 
     checkData(users: User[]): void {
@@ -33,23 +43,24 @@ export class LoginComponent implements OnInit {
         {
             console.log("Error: no data");
             this.message = "Invalid User Name / Password combination.";
+            this.systemService.currentUser = null;
+            this.systemService.loggedIn = false;
+            this.systemService.delete();
         }
-        else {
+        else {  // we have at least one valid user; take the first
             console.log(users);
-            this.user = users[0];
+            this.user = users[0]; // maybe use this
+            this.systemService.currentUser = users[0];  // log in at the system level
+            this.systemService.loggedIn = true;
+            this.systemService.save();
+            this.router.navigate(['/home']);
         }
     }
  
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private systemService: SystemService, private router: Router) { }
 
   ngOnInit() {
-      //this.http
-      //    .get<UserResponse>("http://localhost:51910/Users/Login?UserName=admin&Password=admin")
-      //    .subscribe(data => {
-      //        console.log("data: ", data);
-      //        console.log("data.user: ",data.user);
-      //        console.log("this.user: ",this.user);
-      //    });
+      this.systemService.load();
   }
 
 }

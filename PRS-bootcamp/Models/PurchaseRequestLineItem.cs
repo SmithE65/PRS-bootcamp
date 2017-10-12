@@ -17,5 +17,15 @@ namespace PRS_bootcamp.Models
         public virtual Product Product { get; set; }
 
         public int Quantity { get; set; }
+
+        public void Copy(PurchaseRequestLineItem lineItem)
+        {
+            Id = lineItem.Id;
+            PurchaseRequestId = lineItem.PurchaseRequestId;
+            PurchaseRequest = lineItem.PurchaseRequest;
+            ProductId = lineItem.ProductId;
+            Product = lineItem.Product;
+            Quantity = lineItem.Quantity;
+        }
     }
 }

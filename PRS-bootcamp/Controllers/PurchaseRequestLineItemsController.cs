@@ -49,7 +49,7 @@ namespace PRS_bootcamp.Controllers
             {
                 db.PurchaseRequestLineItems.Add(purchaseRequestLineItem);
                 int numChanges = db.SaveChanges();
-                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." });
+                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(new Msg { Result = "Error", Message = "ModelState invalid" });
@@ -64,7 +64,7 @@ namespace PRS_bootcamp.Controllers
 
             if (purchaseRequestLine == null)
             {
-                return Json(new Msg { Result = "Failed", Message = $"No user found with id: {id}." });
+                return Json(new Msg { Result = "Failed", Message = $"No user found with id: {id}." }, JsonRequestBehavior.AllowGet);
             }
 
             return new JsonNetResult { Data = purchaseRequestLine };
@@ -83,14 +83,39 @@ namespace PRS_bootcamp.Controllers
             PurchaseRequestLineItem purchaseRequestLine = db.PurchaseRequestLineItems.Find(id);
 
             if (purchaseRequestLine == null)
-                return Json(new Msg { Result = "Error", Message = "Invalid user id." });
+                return Json(new Msg { Result = "Error", Message = "Invalid prli id." });
 
             db.PurchaseRequestLineItems.Remove(purchaseRequestLine);
             int numChanges = db.SaveChanges();
 
-            return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
+            return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." }, JsonRequestBehavior.AllowGet);
         }
-        
+
+        public ActionResult Update([Bind(Include = bind)] PurchaseRequestLineItem purchaseRequest)
+        {
+            if (purchaseRequest == null)
+            {
+                return Json(new Msg { Result = "Error", Message = "Update: prli cannot be null." });
+            }
+
+            PurchaseRequestLineItem dbPurchaseRequest = db.PurchaseRequestLineItems.Find(purchaseRequest.Id);
+
+            if (dbPurchaseRequest == null)
+            {
+                return Json(new Msg { Result = "Error", Message = $"Update: invalid id: {purchaseRequest.Id}" }, JsonRequestBehavior.AllowGet);
+            }
+            dbPurchaseRequest.Copy(purchaseRequest);
+
+            int numChanges = 0;
+            if (ModelState.IsValid)
+            {
+                numChanges = db.SaveChanges();
+                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new Msg { Result = "Error", Message = $"ModelState invalid; {numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

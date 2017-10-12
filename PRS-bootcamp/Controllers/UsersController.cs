@@ -68,7 +68,7 @@ namespace PRS_bootcamp.Controllers
         {
             if (user == null)
             {
-                return Json(new Msg { Result = "Error", Message = "Update: user cannot be null." });
+                return Json(new Msg { Result = "Error", Message = "Update: cannot be null." });
             }
 
             User dbUser = db.Users.Find(user.Id);

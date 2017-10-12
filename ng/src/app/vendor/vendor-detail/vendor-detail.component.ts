@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/switchMap';
+
+import { Vendor } from '../../models/vendor';
+import { VendorService } from '../../services/vendor.service';
 
 @Component({
   selector: 'app-vendor-detail',
@@ -7,9 +14,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorDetailComponent implements OnInit {
 
-  constructor() { }
+  vendor: Vendor;
+
+  getVendor(): void
+  {
+    this.route.paramMap.switchMap(
+      (params: ParamMap) => this.vendorService.get(params.get('id'))
+    )
+      .subscribe((vendor: Vendor) => this.vendor = vendor);
+  }
+
+  constructor(private vendorService: VendorService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getVendor();
   }
 
 }

@@ -34,5 +34,17 @@ namespace PRS_bootcamp.Models
 
         [StringLength(50)]
         public string Photopath { get; set; }
+
+        public void Copy(Product product)
+        {
+            Id = product.Id;
+            VendorId = product.VendorId;
+            Vendor = product.Vendor;
+            VendorPartNumber = product.VendorPartNumber;
+            Name = product.Name;
+            Price = product.Price;
+            Unit = product.Unit;
+            Photopath = product.Photopath;
+        }
     }
 }

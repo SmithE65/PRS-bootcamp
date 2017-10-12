@@ -36,5 +36,21 @@ namespace PRS_bootcamp.Models
 
         [StringLength(100)]
         public string ReasonForRejection { get; set; }
+
+        public void Copy(PurchaseRequest purchaseRequest)
+        {
+            Id = purchaseRequest.Id;
+            UserId = purchaseRequest.UserId;
+            User = purchaseRequest.User;
+            Description = purchaseRequest.Description;
+            Justification = purchaseRequest.Justification;
+            DateNeeded = purchaseRequest.DateNeeded;
+            DeliveryMode = purchaseRequest.DeliveryMode;
+            StatusId = purchaseRequest.StatusId;
+            Status = purchaseRequest.Status;
+            Total = purchaseRequest.Total;
+            SubmittedDate = purchaseRequest.SubmittedDate;
+            ReasonForRejection = purchaseRequest.ReasonForRejection;
+        }
     }
 }

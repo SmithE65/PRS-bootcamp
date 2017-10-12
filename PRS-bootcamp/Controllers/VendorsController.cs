@@ -17,7 +17,7 @@ namespace PRS_bootcamp.Controllers
             {
                 db.Vendors.Add(vendor);
                 int numChanges = db.SaveChanges();
-                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." });
+                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(new Msg { Result = "Error", Message = "ModelState invalid" });
@@ -32,7 +32,7 @@ namespace PRS_bootcamp.Controllers
 
             if (vendor == null)
             {
-                return Json(new Msg { Result = "Failed", Message = $"No user found with id: {id}." });
+                return Json(new Msg { Result = "Failed", Message = $"No user found with id: {id}." }, JsonRequestBehavior.AllowGet);
             }
 
             return new JsonNetResult { Data = vendor };
@@ -56,7 +56,32 @@ namespace PRS_bootcamp.Controllers
             db.Vendors.Remove(vendor);
             int numChanges = db.SaveChanges();
 
-            return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
+            return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Update([Bind(Include = bind)] Vendor vendor)
+        {
+            if (vendor == null)
+            {
+                return Json(new Msg { Result = "Error", Message = "Update: vendor cannot be null." });
+            }
+
+            Vendor dbVendor = db.Vendors.Find(vendor.Id);
+
+            if (dbVendor == null)
+            {
+                return Json(new Msg { Result = "Error", Message = $"Update: invalid id: {vendor.Id}" }, JsonRequestBehavior.AllowGet);
+            }
+            dbVendor.Copy(vendor);
+
+            int numChanges = 0;
+            if (ModelState.IsValid)
+            {
+                numChanges = db.SaveChanges();
+                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new Msg { Result = "Error", Message = $"ModelState invalid; {numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

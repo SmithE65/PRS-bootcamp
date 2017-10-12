@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import 'rxjs/add/operator/toPromise';
+
+import { Vendor } from '../../models/vendor';
+import { VendorService } from '../../services/vendor.service';
 
 @Component({
   selector: 'app-vendor-add',
@@ -7,7 +13,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorAddComponent implements OnInit {
 
-  constructor() { }
+  vendor: Vendor = new Vendor(0, '', '', '', '', '', '', '', '', false);
+
+  add(): void
+  {
+    this.vendorService.add(this.vendor).then(resp => { console.log(resp); this.router.navigate(['/vendors']) });
+  }
+
+  constructor(private vendorService: VendorService, private router: Router) { }
 
   ngOnInit() {
   }

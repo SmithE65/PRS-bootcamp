@@ -58,6 +58,32 @@ namespace PRS_bootcamp.Controllers
             return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
         }
 
+        public ActionResult Update([Bind(Include = bind)] Product product)
+        {
+            if (product == null)
+            {
+                return Json(new Msg { Result = "Error", Message = "Update: product cannot be null." });
+            }
+
+            Product dbProduct = db.Products.Find(product.Id);
+
+            if (dbProduct == null)
+            {
+                return Json(new Msg { Result = "Error", Message = $"Update: invalid id: {product.Id}" }, JsonRequestBehavior.AllowGet);
+            }
+            dbProduct.Copy(product);
+
+            int numChanges = 0;
+            if (ModelState.IsValid)
+            {
+                numChanges = db.SaveChanges();
+                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new Msg { Result = "Error", Message = $"ModelState invalid; {numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

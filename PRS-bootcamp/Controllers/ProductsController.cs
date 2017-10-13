@@ -16,7 +16,7 @@ namespace PRS_bootcamp.Controllers
             {
                 db.Products.Add(product);
                 int numChanges = db.SaveChanges();
-                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." });
+                return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." }, JsonRequestBehavior.AllowGet);
             }
 
             return Json(new Msg { Result = "Error", Message = "ModelState invalid" });
@@ -55,7 +55,7 @@ namespace PRS_bootcamp.Controllers
             db.Products.Remove(product);
             int numChanges = db.SaveChanges();
 
-            return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
+            return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Update([Bind(Include = bind)] Product product)

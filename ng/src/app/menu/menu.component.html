@@ -10,11 +10,12 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li *ngFor="let menu of menusLeft">
-          <a routerLink={{menu.href}}>{{menu.display}}</a>
-        </li>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/about">About</a></li>
+        <li><a routerLink="/browse">Browse</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a routerLink="/cart">Shopping Cart</a></li>
         <li class="dropdown" *ngIf="systemService.loggedIn && systemService.currentUser.IsAdmin">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             Admin
@@ -25,6 +26,7 @@
             <li><a routerLink="/vendors">Vendors</a></li>
             <li><a routerLink="/products">Products</a></li>
             <li><a routerLink="/requests">Purchase Requests</a></li>
+            <li><a routerLink="/lineitems">Line Items</a></li>
           </ul>
         </li>
         <li *ngIf="!systemService.loggedIn">

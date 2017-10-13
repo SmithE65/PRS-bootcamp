@@ -13,14 +13,7 @@ import { Menu } from './menu';
 })
 export class MenuComponent implements OnInit {
 
-    name = "Menu Component"
-    menusLeft: Menu[] = [
-        new Menu('Home', '/home', 'Back to homepage.'),
-        new Menu('About', '/about', 'About this page.')
-    ];
-
-    menusRight: Menu[] = [
-    ];
+  name = "Menu Component";
 
   constructor(private systemService: SystemService) { }
 

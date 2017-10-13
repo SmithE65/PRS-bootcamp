@@ -118,9 +118,11 @@ import { VendorService }          from './services/vendor.service';
   providers: [
     ProductService,
     PurchaseRequestService,
-      UserService,
+    ShoppingCartService,
+    StatusService,
     SystemService,
-      VendorService
+    UserService,
+    VendorService
   ],
   bootstrap: [AppComponent]
 })

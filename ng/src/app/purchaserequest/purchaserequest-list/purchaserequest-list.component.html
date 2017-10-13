@@ -22,7 +22,7 @@
         <td>{{request.DateNeeded}}</td>
         <td>{{request.DeliveryMode}}</td>
         <td>{{request.Total | currency:'USD':true}}</td>
-        <td>{{request.StatusId}}</td>
+        <td>{{request.Status.Description}}</td>
         <td>
           <a routerLink="/requests/detail/{{request.Id}}">Detail</a>
           |

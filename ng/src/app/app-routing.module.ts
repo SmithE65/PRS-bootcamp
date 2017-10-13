@@ -25,7 +25,26 @@ import { ProductListComponent }   from './product/product-list/product-list.comp
 import { PurchaserequestAddComponent }    from './purchaserequest/purchaserequest-add/purchaserequest-add.component';
 import { PurchaserequestDetailComponent } from './purchaserequest/purchaserequest-detail/purchaserequest-detail.component';
 import { PurchaserequestEditComponent }   from './purchaserequest/purchaserequest-edit/purchaserequest-edit.component';
-import { PurchaserequestListComponent }   from './purchaserequest/purchaserequest-list/purchaserequest-list.component';
+import { PurchaserequestListComponent } from './purchaserequest/purchaserequest-list/purchaserequest-list.component';
+
+// status related components
+import { StatusAddComponent } from './status/status-add/status-add.component';
+import { StatusDetailComponent } from './status/status-detail/status-detail.component';
+import { StatusEditComponent } from './status/status-edit/status-edit.component';
+import { StatusListComponent } from './status/status-list/status-list.component';
+
+// purchase request line item related components
+import { PrLineItemAddComponent } from './lineitem/pr-line-item-add/pr-line-item-add.component';
+import { PrLineItemDetailComponent } from './lineitem/pr-line-item-detail/pr-line-item-detail.component';
+import { PrLineItemEditComponent } from './lineitem/pr-line-item-edit/pr-line-item-edit.component';
+import { PrLineItemListComponent } from './lineitem/pr-line-item-list/pr-line-item-list.component';
+
+// browse compent
+import { BrowseComponent } from './browse/browse.component';
+
+// shopping car component
+import { CartComponent } from './cart/cart.component';
+
 
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -50,8 +69,23 @@ const routes: Routes = [
     { path: "requests", component: PurchaserequestListComponent },
     { path: "requests/add", component: PurchaserequestAddComponent },
     { path: "requests/detail/:id", component: PurchaserequestDetailComponent },
-    { path: "requests/edit/:id", component: PurchaserequestEditComponent }
+    { path: "requests/edit/:id", component: PurchaserequestEditComponent },
+    // status related routes
+    { path: "status", component: StatusListComponent },
+    { path: "status/add", component: StatusAddComponent },
+    { path: "status/detail/:id", component: StatusDetailComponent },
+    { path: "status/edit/:id", component: StatusEditComponent },
+    // line item related routes
+    { path: "lineitems", component: PrLineItemListComponent },
+    { path: "lineitems/add", component: PrLineItemAddComponent },
+    { path: "lineitems/detail/:id", component: PrLineItemDetailComponent },
+    { path: "lineitems/edit/:id", component: PrLineItemEditComponent },
+    // browsing related routes
+    { path: "browse", component: BrowseComponent },
+    // shopping cart related routes
+    { path: "cart", component: CartComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

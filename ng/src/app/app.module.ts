@@ -38,16 +38,32 @@ import { PurchaserequestDetailComponent } from './purchaserequest/purchasereques
 import { PurchaserequestEditComponent }   from './purchaserequest/purchaserequest-edit/purchaserequest-edit.component';
 import { PurchaserequestListComponent }   from './purchaserequest/purchaserequest-list/purchaserequest-list.component';
 
+// status related components
+import { StatusAddComponent }     from './status/status-add/status-add.component';
+import { StatusDetailComponent }  from './status/status-detail/status-detail.component';
+import { StatusEditComponent }    from './status/status-edit/status-edit.component';
+import { StatusListComponent }    from './status/status-list/status-list.component';
+
+// purchase request line item related components
+import { PrLineItemAddComponent }     from './lineitem/pr-line-item-add/pr-line-item-add.component';
+import { PrLineItemDetailComponent }  from './lineitem/pr-line-item-detail/pr-line-item-detail.component';
+import { PrLineItemEditComponent }    from './lineitem/pr-line-item-edit/pr-line-item-edit.component';
+import { PrLineItemListComponent }    from './lineitem/pr-line-item-list/pr-line-item-list.component';
+
+// browse compent
+import { BrowseComponent } from './browse/browse.component';
+
+// shopping car component
+import { CartComponent } from './cart/cart.component';
+
 // import services
 import { ProductService }         from './services/product.service';
 import { PurchaseRequestService } from './services/purchaserequest.service';
+import { ShoppingCartService }    from './services/shopping-cart.service';
+import { StatusService }          from './services/status.service';
 import { SystemService }          from './services/system.service';
 import { UserService }            from './services/user.service';
 import { VendorService }          from './services/vendor.service';
-import { StatusAddComponent } from './status/status-add/status-add.component';
-import { StatusDetailComponent } from './status/status-detail/status-detail.component';
-import { StatusEditComponent } from './status/status-edit/status-edit.component';
-import { StatusListComponent } from './status/status-list/status-list.component';
 
 
 @NgModule({
@@ -57,6 +73,16 @@ import { StatusListComponent } from './status/status-list/status-list.component'
     HeaderComponent,
     HomeComponent,
     LoginComponent,
+    // status components
+    StatusAddComponent,
+    StatusDetailComponent,
+    StatusEditComponent,
+    StatusListComponent,
+    // line item components for purchase requests
+    PrLineItemAddComponent,
+    PrLineItemDetailComponent,
+    PrLineItemEditComponent,
+    PrLineItemListComponent,
     // product components
     ProductAddComponent,
     ProductDetailComponent,
@@ -78,10 +104,9 @@ import { StatusListComponent } from './status/status-list/status-list.component'
     VendorEditComponent,
     VendorDetailComponent,
     VendorAddComponent,
-    StatusAddComponent,
-    StatusDetailComponent,
-    StatusEditComponent,
-    StatusListComponent
+    // Components for browsing products and filling out purchase requests
+    BrowseComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

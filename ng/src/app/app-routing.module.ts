@@ -47,7 +47,10 @@ const routes: Routes = [
     { path: "products/detail/:id", component: ProductDetailComponent },
     { path: "products/edit/:id", component: ProductEditComponent },
     // purchase request related routes
-    { path: "requests", component: Pur}
+    { path: "requests", component: PurchaserequestListComponent },
+    { path: "requests/add", component: PurchaserequestAddComponent },
+    { path: "requests/detail/:id", component: PurchaserequestDetailComponent },
+    { path: "requests/edit/:id", component: PurchaserequestEditComponent }
 ];
 
 @NgModule({

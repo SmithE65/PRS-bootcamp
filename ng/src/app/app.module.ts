@@ -37,6 +37,10 @@ import { ProductService }         from './services/product.service';
 import { SystemService }          from './services/system.service';
 import { UserService }            from './services/user.service';
 import { VendorService }          from './services/vendor.service';
+import { PurchaserequestAddComponent } from './purchaserequest/purchaserequest-add/purchaserequest-add.component';
+import { PurchaserequestDetailComponent } from './purchaserequest/purchaserequest-detail/purchaserequest-detail.component';
+import { PurchaserequestEditComponent } from './purchaserequest/purchaserequest-edit/purchaserequest-edit.component';
+import { PurchaserequestListComponent } from './purchaserequest/purchaserequest-list/purchaserequest-list.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,11 @@ import { VendorService }          from './services/vendor.service';
     VendorListComponent,
     VendorEditComponent,
     VendorDetailComponent,
-    VendorAddComponent
+    VendorAddComponent,
+    PurchaserequestAddComponent,
+    PurchaserequestDetailComponent,
+    PurchaserequestEditComponent,
+    PurchaserequestListComponent
   ],
   imports: [
     BrowserModule,

@@ -22,10 +22,10 @@ import { ProductEditComponent }   from './product/product-edit/product-edit.comp
 import { ProductListComponent }   from './product/product-list/product-list.component';
 
 // purchase request imports
-import { PurchaserequestAddComponent }    from './purchaserequest/purchaserequest-add';
-import { PurchaserequestDetailComponent } from './purchaserequest/purchaserequest-detail';
-import { PurchaserequestEditComponent }   from './purchaserequest/purchaserequest-edit';
-import { PurchaserequestListComponent }   from './purchaserequest/purchaserequest-list';
+import { PurchaserequestAddComponent }    from './purchaserequest/purchaserequest-add/purchaserequest-add.component';
+import { PurchaserequestDetailComponent } from './purchaserequest/purchaserequest-detail/purchaserequest-detail.component';
+import { PurchaserequestEditComponent }   from './purchaserequest/purchaserequest-edit/purchaserequest-edit.component';
+import { PurchaserequestListComponent }   from './purchaserequest/purchaserequest-list/purchaserequest-list.component';
 
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },

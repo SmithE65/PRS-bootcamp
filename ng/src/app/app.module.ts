@@ -44,6 +44,10 @@ import { PurchaseRequestService } from './services/purchaserequest.service';
 import { SystemService }          from './services/system.service';
 import { UserService }            from './services/user.service';
 import { VendorService }          from './services/vendor.service';
+import { StatusAddComponent } from './status/status-add/status-add.component';
+import { StatusDetailComponent } from './status/status-detail/status-detail.component';
+import { StatusEditComponent } from './status/status-edit/status-edit.component';
+import { StatusListComponent } from './status/status-list/status-list.component';
 
 
 @NgModule({
@@ -73,7 +77,11 @@ import { VendorService }          from './services/vendor.service';
     VendorListComponent,
     VendorEditComponent,
     VendorDetailComponent,
-    VendorAddComponent
+    VendorAddComponent,
+    StatusAddComponent,
+    StatusDetailComponent,
+    StatusEditComponent,
+    StatusListComponent
   ],
   imports: [
     BrowserModule,

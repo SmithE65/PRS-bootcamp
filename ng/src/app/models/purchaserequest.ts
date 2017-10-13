@@ -1,5 +1,6 @@
-// user
+// required models
 import { User } from './user';
+import { Status } from './status';
 
 export class PurchaseRequest
 {
@@ -11,6 +12,7 @@ export class PurchaseRequest
   DateNeeded: Date;
   DeliveryMode: string;
   StatusId: number;
+  Status: Status;
   Total: number;
   SubmittedDate: Date;
   ReasonForRejection: string;

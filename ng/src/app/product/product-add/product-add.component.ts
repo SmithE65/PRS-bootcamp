@@ -26,6 +26,7 @@ export class ProductAddComponent implements OnInit {
   add(): void
   {
     this.productService.add(this.product).then(resp => console.log(resp));
+    this.router.navigate(['/products']);
   }
 
   initProduct(): void

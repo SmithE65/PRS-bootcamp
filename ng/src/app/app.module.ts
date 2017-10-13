@@ -1,8 +1,9 @@
 // import external modules
-import { BrowserModule }  from '@angular/platform-browser';
-import { NgModule }       from '@angular/core';
-import { FormsModule }    from '@angular/forms';
-import { HttpModule }     from '@angular/http';
+import { BrowserModule }          from '@angular/platform-browser';
+import { NgModule }               from '@angular/core';
+import { FormsModule }            from '@angular/forms';
+import { HttpModule }             from '@angular/http';
+//import { MatAutocompleteModule }  from '@angular/material';
 
 // import project components and modules
 import { AppRoutingModule }       from './app-routing.module';
@@ -44,25 +45,29 @@ import { VendorService }          from './services/vendor.service';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
+    // product components
+    ProductAddComponent,
+    ProductDetailComponent,
+    ProductEditComponent,
+    ProductListComponent,
+    // user components
     UserComponent,
     UserListComponent,
     UserDetailComponent,
     UserEditComponent,
     UserAddComponent,
+    // vendor components
     VendorListComponent,
     VendorEditComponent,
     VendorDetailComponent,
-    VendorAddComponent,
-    ProductAddComponent,
-    ProductDetailComponent,
-    ProductEditComponent,
-    ProductListComponent
+    VendorAddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    //MatAutocompleteModule
   ],
   providers: [
     ProductService,

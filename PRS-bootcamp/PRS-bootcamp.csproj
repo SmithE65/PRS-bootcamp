@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201710032023250_PurchaseRequest ReasonForRejection not required.Designer.cs">
       <DependentUpon>201710032023250_PurchaseRequest ReasonForRejection not required.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710131429175_Products VendorId required.cs" />
+    <Compile Include="Migrations\201710131429175_Products VendorId required.Designer.cs">
+      <DependentUpon>201710131429175_Products VendorId required.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\PRS_bootcampContext.cs" />
@@ -273,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710032023250_PurchaseRequest ReasonForRejection not required.resx">
       <DependentUpon>201710032023250_PurchaseRequest ReasonForRejection not required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131429175_Products VendorId required.resx">
+      <DependentUpon>201710131429175_Products VendorId required.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

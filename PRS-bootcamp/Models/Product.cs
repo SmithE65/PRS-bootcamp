@@ -12,9 +12,9 @@ namespace PRS_bootcamp.Models
         public int Id { get; set; }
 
         [Index(name: "IX_VendorPartNumber", Order = 1, IsUnique = true)]
-        public int VendorId { get; set; }
 
         [Required]
+        public int VendorId { get; set; }
         public virtual Vendor Vendor { get; set; }
 
         [Required]

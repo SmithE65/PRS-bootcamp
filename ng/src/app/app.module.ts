@@ -32,15 +32,19 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
 import { ProductEditComponent }   from './product/product-edit/product-edit.component';
 import { ProductListComponent }   from './product/product-list/product-list.component';
 
-// import services
-import { ProductService }         from './services/product.service';
-import { SystemService }          from './services/system.service';
-import { UserService }            from './services/user.service';
-import { VendorService }          from './services/vendor.service';
+// purchase request related components
 import { PurchaserequestAddComponent } from './purchaserequest/purchaserequest-add/purchaserequest-add.component';
 import { PurchaserequestDetailComponent } from './purchaserequest/purchaserequest-detail/purchaserequest-detail.component';
 import { PurchaserequestEditComponent } from './purchaserequest/purchaserequest-edit/purchaserequest-edit.component';
 import { PurchaserequestListComponent } from './purchaserequest/purchaserequest-list/purchaserequest-list.component';
+
+// import services
+import { ProductService } from './services/product.service';
+import { PurchaseRequestService } from './services/purchaserequest.service';
+import { SystemService }          from './services/system.service';
+import { UserService }            from './services/user.service';
+import { VendorService }          from './services/vendor.service';
+
 
 @NgModule({
   declarations: [
@@ -54,6 +58,11 @@ import { PurchaserequestListComponent } from './purchaserequest/purchaserequest-
     ProductDetailComponent,
     ProductEditComponent,
     ProductListComponent,
+    // purchase request components
+    PurchaserequestAddComponent,
+    PurchaserequestDetailComponent,
+    PurchaserequestEditComponent,
+    PurchaserequestListComponent,
     // user components
     UserComponent,
     UserListComponent,
@@ -64,11 +73,7 @@ import { PurchaserequestListComponent } from './purchaserequest/purchaserequest-
     VendorListComponent,
     VendorEditComponent,
     VendorDetailComponent,
-    VendorAddComponent,
-    PurchaserequestAddComponent,
-    PurchaserequestDetailComponent,
-    PurchaserequestEditComponent,
-    PurchaserequestListComponent
+    VendorAddComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +84,7 @@ import { PurchaserequestListComponent } from './purchaserequest/purchaserequest-
   ],
   providers: [
     ProductService,
+    PurchaseRequestService,
       UserService,
     SystemService,
       VendorService

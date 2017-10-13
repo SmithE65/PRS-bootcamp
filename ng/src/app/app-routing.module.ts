@@ -21,6 +21,12 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
 import { ProductEditComponent }   from './product/product-edit/product-edit.component';
 import { ProductListComponent }   from './product/product-list/product-list.component';
 
+// purchase request imports
+import { PurchaserequestAddComponent }    from './purchaserequest/purchaserequest-add';
+import { PurchaserequestDetailComponent } from './purchaserequest/purchaserequest-detail';
+import { PurchaserequestEditComponent }   from './purchaserequest/purchaserequest-edit';
+import { PurchaserequestListComponent }   from './purchaserequest/purchaserequest-list';
+
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "home", component: HomeComponent },
@@ -39,7 +45,9 @@ const routes: Routes = [
     { path: "products", component: ProductListComponent },
     { path: "products/add", component: ProductAddComponent },
     { path: "products/detail/:id", component: ProductDetailComponent },
-    { path: "products/edit/:id", component: ProductEditComponent }
+    { path: "products/edit/:id", component: ProductEditComponent },
+    // purchase request related routes
+    { path: "requests", component: Pur}
 ];
 
 @NgModule({

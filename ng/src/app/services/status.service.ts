@@ -6,7 +6,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { Status } from '../models/status';
 
-const urlBase: string = "http://localhost:4200/Status/";
+const urlBase: string = "http://localhost:51910/Status/";
 
 @Injectable()
 export class StatusService {

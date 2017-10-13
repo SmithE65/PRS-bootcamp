@@ -1,3 +1,48 @@
 <p>
   purchaserequest-detail works!
 </p>
+
+<div class="container">
+  <table class="table table-bordered table-striped" *ngIf="request">
+    <tr>
+      <th>Id</th>
+      <td>{{request.Id}}</td>
+    </tr>
+    <tr>
+      <th>User</th>
+      <td>{{request.User.UserName}}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{request.Description}}</td>
+    </tr>
+    <tr>
+      <th>Justification</th>
+      <td>{{request.Justification}}</td>
+    </tr>
+    <tr>
+      <th>Date Needed</th>
+      <td>{{request.DateNeeded}}</td>
+    </tr>
+    <tr>
+      <th>Delivery Mode</th>
+      <td>{{request.DeliveryMode}}</td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td>{{request.Status.Description}}</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td>{{request.Total | currency:'USD':true}}</td>
+    </tr>
+    <tr>
+      <th>Date Submitted</th>
+      <td>{{request.SubmittedDate}}</td>
+    </tr>
+    <tr>
+      <th>Rejection Reason</th>
+      <td>{{request.ReasonForRejection}}</td>
+    </tr>
+  </table>
+</div>

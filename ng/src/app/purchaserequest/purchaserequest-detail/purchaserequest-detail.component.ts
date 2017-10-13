@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/switchMap';
+
+import { PurchaseRequest } from '../../models/purchaserequest';
+
+import { PurchaseRequestService } from '../../services/purchaserequest.service';
+import { SystemService } from '../../services/system.service';
 
 @Component({
   selector: 'app-purchaserequest-detail',
@@ -7,9 +16,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchaserequestDetailComponent implements OnInit {
 
-  constructor() { }
+  request: PurchaseRequest;
+
+  getRequest(): void
+  {
+    this.route.paramMap.switchMap(
+      (params: ParamMap) => this.prService.get(params.get('id')))
+      .subscribe(resp => this.request = resp);
+  }
+
+  constructor(
+    private prService: PurchaseRequestService,
+    private sysService: SystemService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.getRequest();
   }
 
 }

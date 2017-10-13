@@ -10,7 +10,7 @@ export class PurchaseRequest
   Justification: string;
   DateNeeded: Date;
   DeliveryMode: string;
-  Status: string;
+  StatusId: number;
   Total: number;
   SubmittedDate: Date;
   ReasonForRejection: string;

@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <th>Date Needed</th>
-      <td>{{request.DateNeeded}}</td>
+      <td>{{request.DateNeeded | date:'shortDate'}}</td>
     </tr>
     <tr>
       <th>Delivery Mode</th>
@@ -38,11 +38,13 @@
     </tr>
     <tr>
       <th>Date Submitted</th>
-      <td>{{request.SubmittedDate}}</td>
+      <td>{{request.SubmittedDate | date:'shortDate'}}</td>
     </tr>
     <tr>
       <th>Rejection Reason</th>
       <td>{{request.ReasonForRejection}}</td>
     </tr>
   </table>
+  <button class="btn" (click)="edit()">Edit</button>
+  <button class="btn btn-danger" (click)="delete()">Delete</button>
 </div>

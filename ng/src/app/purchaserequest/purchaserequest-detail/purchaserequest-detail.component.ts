@@ -18,6 +18,16 @@ export class PurchaserequestDetailComponent implements OnInit {
 
   request: PurchaseRequest;
 
+  delete(): void
+  {
+    this.prService.delete(this.request.Id).then(resp => { console.log(resp); this.router.navigate(['/requests']) });
+  }
+
+  edit(): void
+  {
+    this.router.navigate(['/requests/edit/' + this.request.Id]);
+  }
+
   getRequest(): void
   {
     this.route.paramMap.switchMap(

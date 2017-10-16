@@ -14,10 +14,10 @@ export class StatusService {
   add(status: Status): Promise<any>
   {
     let url = urlBase + "Add";
-    return this.http.get(url).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
+    return this.http.post(url, status).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
   }
 
-  delete(id: string): Promise<any>
+  delete(id: number): Promise<any>
   {
     let url = urlBase + "Remove/" + id;
     return this.http.get(url).toPromise().then(resp => resp.json() || {}).catch(this.handleError);

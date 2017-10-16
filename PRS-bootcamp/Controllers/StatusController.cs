@@ -20,7 +20,7 @@ namespace PRS_bootcamp.Controllers
                 return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new Msg { Result = "Error", Message = "ModelState invalid" });
+            return Json(new Msg { Result = "Error", Message = "ModelState invalid" }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Get(int? id)

@@ -1,3 +1,23 @@
 <p>
   status-list works!
 </p>
+
+<div class="container">
+  <table class="table table-bordered table-striped" *ngIf="status">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Description</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of status">
+        <td>{{s.Id}}</td>
+        <td>{{s.Description}}</td>
+        <td><a routerLink="/status/edit/{{s.Id}}">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <a routerLink="/status/add">Create New</a>
+</div>

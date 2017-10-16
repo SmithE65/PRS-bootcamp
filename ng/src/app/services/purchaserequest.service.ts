@@ -17,7 +17,7 @@ export class PurchaseRequestService {
     return this.http.post(url, pr).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
   }
 
-  delete(id: string): Promise<any>
+  delete(id: number): Promise<any>
   {
     let url = urlBase + "Remove/" + id;
     return this.http.get(url).toPromise().then(resp => resp.json() || {}).catch(this.handleError);

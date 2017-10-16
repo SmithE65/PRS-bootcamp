@@ -36,6 +36,16 @@ export class PurchaserequestEditComponent implements OnInit {
       .subscribe(resp => this.status = resp);
   }
 
+  delete(): void
+  {
+    this.prService.delete(this.request.Id).then(resp => { console.log(resp); this.router.navigate(['/requests']) });
+  }
+
+  update(): void
+  {
+    this.prService.update(this.request).then(resp => { console.log(resp); this.router.navigate(['/requests']) });
+  }
+
   constructor(
     private prService: PurchaseRequestService,
     private statusService: StatusService,

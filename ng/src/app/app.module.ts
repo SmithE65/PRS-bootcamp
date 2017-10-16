@@ -57,6 +57,7 @@ import { BrowseComponent } from './browse/browse.component';
 import { CartComponent } from './cart/cart.component';
 
 // import services
+import { PrLineItemService }      from './services/pr-line-item.service';
 import { ProductService }         from './services/product.service';
 import { PurchaseRequestService } from './services/purchaserequest.service';
 import { ShoppingCartService }    from './services/shopping-cart.service';
@@ -116,6 +117,7 @@ import { VendorService }          from './services/vendor.service';
     //MatAutocompleteModule
   ],
   providers: [
+    PrLineItemService,
     ProductService,
     PurchaseRequestService,
     ShoppingCartService,

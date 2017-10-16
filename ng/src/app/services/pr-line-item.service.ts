@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { LineItem } from '../models/lineitem';
 
-const urlBase: string = "http://localhost:4200/PurchaseRequestLineItems/"
+const urlBase: string = "http://localhost:51910/PurchaseRequestLineItems/"
 
 @Injectable()
 export class PrLineItemService {

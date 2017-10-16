@@ -4,6 +4,8 @@ import 'rxjs/add/operator/toPromise';
 
 import { LineItem } from '../../models/lineitem';
 
+import { PrLineItemService } from '../../services/pr-line-item.service';
+
 @Component({
   selector: 'app-pr-line-item-list',
   templateUrl: './pr-line-item-list.component.html',
@@ -11,9 +13,17 @@ import { LineItem } from '../../models/lineitem';
 })
 export class PrLineItemListComponent implements OnInit {
 
-  constructor() { }
+  lineitems: LineItem[];
+
+  getItems(): void
+  {
+    this.lineitemService.list().then(resp => this.lineitems = resp);
+  }
+
+  constructor(private lineitemService: PrLineItemService) { }
 
   ngOnInit() {
+    this.getItems();
   }
 
 }

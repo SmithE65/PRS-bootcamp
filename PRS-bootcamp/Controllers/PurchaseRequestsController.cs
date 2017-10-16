@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using PRS_bootcamp.Models;
 using PRS_bootcamp.Utilities;
@@ -58,17 +59,27 @@ namespace PRS_bootcamp.Controllers
 
         public ActionResult Get(int? id)
         {
-            if (id == null)
-                return Json(new Msg { Result = "Failed", Message = "ID is null" });
+            if (id == null || id <= 0)
+                return Json(new Msg { Result = "Error", Message = "Get: id either null or invalid" });
 
             PurchaseRequest purchaseRequest = db.PurchaseRequests.Find(id);
 
             if (purchaseRequest == null)
             {
-                return Json(new Msg { Result = "Failed", Message = $"No user found with id: {id}." }, JsonRequestBehavior.AllowGet);
+                return Json(new Msg { Result = "Error", Message = $"No user found with id: {id}." }, JsonRequestBehavior.AllowGet);
             }
 
             return new JsonNetResult { Data = purchaseRequest };
+        }
+
+        public ActionResult GetItems(int? id)
+        {
+            if (id == null || id <= 0)
+                return Json(new Msg { Result = "Error", Message = "GetItems: id either null or invalid" });
+
+            List<PurchaseRequestLineItem> items = db.PurchaseRequestLineItems.Where(li => li.PurchaseRequestId == id).ToList();
+
+            return new JsonNetResult { Data = items };
         }
 
         public ActionResult List()

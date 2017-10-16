@@ -66,6 +66,7 @@ import { SystemService }          from './services/system.service';
 import { UserService }            from './services/user.service';
 import { VendorService }          from './services/vendor.service';
 import { AboutComponent } from './about/about.component';
+import { ReviewComponent } from './review/review.component';
 
 
 @NgModule({
@@ -109,7 +110,8 @@ import { AboutComponent } from './about/about.component';
     VendorAddComponent,
     // Components for browsing products and filling out purchase requests
     BrowseComponent,
-    CartComponent
+    CartComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,

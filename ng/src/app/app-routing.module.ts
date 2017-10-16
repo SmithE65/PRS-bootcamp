@@ -45,6 +45,9 @@ import { BrowseComponent } from './browse/browse.component';
 // shopping car component
 import { CartComponent } from './cart/cart.component';
 
+// request review component
+import { ReviewComponent } from './review/review.component';
+
 
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -83,7 +86,9 @@ const routes: Routes = [
     // browsing related routes
     { path: "browse", component: BrowseComponent },
     // shopping cart related routes
-    { path: "cart", component: CartComponent }
+    { path: "cart", component: CartComponent },
+    // request review related routes
+    { path: "review", component: ReviewComponent }
 ];
 
 

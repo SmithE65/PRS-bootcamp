@@ -14,7 +14,17 @@ import { UserService } from '../../services/user.service';
 })
 export class UserDetailComponent implements OnInit {
 
-    user: User;
+  user: User;
+
+  delete(): void
+  {
+    this.userService.delete(this.user.Id).then(resp => { console.log(resp); this.router.navigate(['/users']) });
+  }
+
+  edit(): void
+  {
+    this.router.navigate(['/users/edit/' + this.user.Id]);
+  }
 
     getUser(): void
     {

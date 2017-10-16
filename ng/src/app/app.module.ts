@@ -65,6 +65,7 @@ import { StatusService }          from './services/status.service';
 import { SystemService }          from './services/system.service';
 import { UserService }            from './services/user.service';
 import { VendorService }          from './services/vendor.service';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { VendorService }          from './services/vendor.service';
     AppComponent,
     MenuComponent,
     HeaderComponent,
-    HomeComponent,
+    HomeComponent,  // home page
+    AboutComponent, // page about
     LoginComponent,
     // status components
     StatusAddComponent,

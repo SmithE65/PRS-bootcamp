@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SystemService } from '../services/system.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sysService: SystemService) { }
 
   ngOnInit() {
   }

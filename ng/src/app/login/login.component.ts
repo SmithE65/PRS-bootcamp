@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         this.systemService.currentUser = null;
         this.systemService.loggedIn = false;
         this.systemService.delete();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/home']);
     }
 
     checkData(users: User[]): void {

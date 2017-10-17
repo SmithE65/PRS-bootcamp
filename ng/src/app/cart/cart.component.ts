@@ -15,6 +15,11 @@ import { SystemService } from '../services/system.service';
 })
 export class CartComponent implements OnInit {
 
+  debug(msg: any): void
+  {
+    console.log(msg);
+  }
+
   constructor(
     private cartService: ShoppingCartService,
     private sysService: SystemService

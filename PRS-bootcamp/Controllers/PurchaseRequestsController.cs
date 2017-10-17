@@ -72,6 +72,14 @@ namespace PRS_bootcamp.Controllers
             return new JsonNetResult { Data = purchaseRequest };
         }
 
+        public ActionResult GetByUser(int? id)
+        {
+            if (id == null || id <= 0)
+                return Json(new Msg { Result = "Error", Message = "GetByUser: id either null or invalid" });
+
+            return new JsonNetResult { Data = db.PurchaseRequests.Where(r => r.UserId == id).ToList() };
+        }
+
         public ActionResult GetItems(int? id)
         {
             if (id == null || id <= 0)

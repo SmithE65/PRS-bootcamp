@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/switchMap';
 
 // models
+import { LineItem } from '../models/lineitem';
 import { PurchaseRequest } from '../models/purchaserequest';
 
 const urlBase: string = "http://localhost:51910/PurchaseRequests/";
@@ -40,6 +41,13 @@ export class PurchaseRequestService {
   {
     let url = urlBase + "GetByUser/" + id;
     return this.http.get(url).toPromise().then(resp => resp.json() as PurchaseRequest[]).catch(this.handleError);
+  }
+
+  // gets all lineitems attached to PurchaseRequestId
+  getItems(id: number): Promise<LineItem[]>
+  {
+    let url = urlBase + "GetItems/" + id;
+    return this.http.get(url).toPromise().then(resp => resp.json() as LineItem[]).catch(this.handleError);
   }
 
   // get all the requests from the db

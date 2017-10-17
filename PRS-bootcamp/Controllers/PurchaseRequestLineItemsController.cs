@@ -49,6 +49,7 @@ namespace PRS_bootcamp.Controllers
             {
                 db.PurchaseRequestLineItems.Add(purchaseRequestLineItem);
                 int numChanges = db.SaveChanges();
+                UpdateTotal(purchaseRequestLineItem.PurchaseRequestId);
                 return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) added." }, JsonRequestBehavior.AllowGet);
             }
 
@@ -87,6 +88,7 @@ namespace PRS_bootcamp.Controllers
 
             db.PurchaseRequestLineItems.Remove(purchaseRequestLine);
             int numChanges = db.SaveChanges();
+            UpdateTotal(purchaseRequestLine.PurchaseRequestId);
 
             return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." }, JsonRequestBehavior.AllowGet);
         }
@@ -110,6 +112,7 @@ namespace PRS_bootcamp.Controllers
             if (ModelState.IsValid)
             {
                 numChanges = db.SaveChanges();
+                UpdateTotal(purchaseRequest.PurchaseRequestId);
                 return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
             }
 

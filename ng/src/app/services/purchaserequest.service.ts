@@ -76,6 +76,7 @@ export class PurchaseRequestService {
   updateCart(cart: Cart): Promise<any>
   {
     let url = urlBase + "UpdateCart";
+    console.log("UpdateCart:", cart);
     return this.http.post(url, cart).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
   }
 

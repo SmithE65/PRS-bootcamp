@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
             this.systemService.delete();
         }
         else {  // we have at least one valid user; take the first (any more should be handled db side, username should be unique)
-            console.log(users);
+            //console.log(users);
             this.user = users[0]; // maybe use this
             this.systemService.currentUser = users[0];  // log in at the system level
             this.systemService.loggedIn = true;

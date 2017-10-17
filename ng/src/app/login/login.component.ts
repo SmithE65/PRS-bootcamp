@@ -1,8 +1,13 @@
+// angular
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+// models
 import { User } from '../models/user';
+
+// services
 import { UserService } from '../services/user.service';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 import { SystemService } from '../services/system.service';
 
 
@@ -17,29 +22,35 @@ import { SystemService } from '../services/system.service';
 })
 export class LoginComponent implements OnInit {
 
+  // values in log-in form
     username: string = "";
     password: string = "";
     message: string = "";
 
+  // current user
     user: User;
 
+  // login button pressed
     login(): void {
-        this.message = "";
+        this.message = "";  // clear message
 
+      // send username and password to server and see if we get a valid user
         this.userService.login(this.username, this.password).then(data => this.checkData(data));
         
     }
 
+  // sign out
     logout(): void
     {
-        this.systemService.currentUser = null;
-        this.systemService.loggedIn = false;
-        this.systemService.delete();
-        this.router.navigate(['/home']);
+        this.systemService.currentUser = null;  // remove current user
+        this.systemService.loggedIn = false;    // set logged-in flag to false
+        this.systemService.delete();            // remove user from local storage
+        this.router.navigate(['/home']);        // go back to the home page
     }
 
+  // check the results of our login call to the server
     checkData(users: User[]): void {
-        if (users.length == 0)
+        if (users.length == 0)  // no users returned
         {
             console.log("Error: no data");
             this.message = "Invalid User Name / Password combination.";
@@ -47,17 +58,23 @@ export class LoginComponent implements OnInit {
             this.systemService.loggedIn = false;
             this.systemService.delete();
         }
-        else {  // we have at least one valid user; take the first
+        else {  // we have at least one valid user; take the first (any more should be handled db side, username should be unique)
             console.log(users);
             this.user = users[0]; // maybe use this
             this.systemService.currentUser = users[0];  // log in at the system level
             this.systemService.loggedIn = true;
             this.systemService.save();
-            this.router.navigate(['/home']);
+            this.cartService.load(users[0].Id);  // if we have a valid user, we should load the cart
+            this.router.navigate(['/home']);  // success! go to home page
         }
     }
  
-  constructor(private userService: UserService, private systemService: SystemService, private router: Router) { }
+    constructor(
+      private cartService: ShoppingCartService,
+      private userService: UserService,
+      private systemService: SystemService,
+      private router: Router
+    ) { }
 
   ngOnInit() {
       this.systemService.load();

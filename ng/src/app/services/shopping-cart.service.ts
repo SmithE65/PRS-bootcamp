@@ -38,21 +38,21 @@ export class ShoppingCartService {
   }
 
   // gets purchase request for current user
-  load(userid: number): boolean
+  load(userid: number): void
   {
     if (!this.sysService.loggedIn)  // if nobody's logged in, load will fail
-      return false;
+      return;
 
     // until we get a new api call......
-    // get all requests
-    let requests: PurchaseRequest[];
-    this.requestService.getByUser(userid).then(resp => requests = resp);
+    // get all requests by user
+    this.requestService.getByUser(userid).then(resp => this.loadProc(resp));
+  }
 
+  loadProc(requests: PurchaseRequest[]): void
+  {
     // check if we have any IP (in progress) status requests
-    for (let request of requests)
-    {
-      if (request.Status.Description == "IP")
-      {
+    for (let request of requests) {
+      if (request.Status.Description == "IP") {
         this.currentRequest = request;
         this.total = request.Total;
         break;
@@ -60,17 +60,13 @@ export class ShoppingCartService {
     }
 
     // if we got a request
-    if (this.currentRequest)
-    {
+    if (this.currentRequest) {
       this.getItems();  // get the line items
-      return true;      // report success
     }
     // else create one
-    else
-    {
+    else {
       this.createRequest();
     }
-    return false;
   }
 
   update(): void
@@ -90,6 +86,8 @@ export class ShoppingCartService {
       0,                                // current total
       1,                                // IP or CART status -- TO DO: pull id from db by Description string
       new Date());
+
+    console.log("createRequest() called; not functioning")
   }
 
   private getItems(): void

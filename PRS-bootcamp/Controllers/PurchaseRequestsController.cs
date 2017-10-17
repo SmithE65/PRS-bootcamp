@@ -10,10 +10,10 @@ namespace PRS_bootcamp.Controllers
     {
         private PRS_bootcampContext db = new PRS_bootcampContext();
 
-        public struct Cart
+        public class Cart
         {
-            public PurchaseRequest request;
-            public List<PurchaseRequestLineItem> items;
+            public PurchaseRequest request { get; set; }
+            public List<PurchaseRequestLineItem> lineitems { get; set; }
         }
 
         private const string bind = "Id,UserId,Description,Justification,DateNeeded,DeliveryMode,StatusId,Total,SubmittedDate,ReasonForRejection";
@@ -98,7 +98,7 @@ namespace PRS_bootcamp.Controllers
 
             var lineitems = db.PurchaseRequestLineItems.Where(i => i.PurchaseRequestId == pr.Id).ToList();
 
-            return new JsonNetResult { Data = new Cart { request = pr, items = lineitems } };
+            return new JsonNetResult { Data = new Cart { request = pr, lineitems = lineitems } };
         }
 
         public ActionResult GetByUser(int? id)
@@ -179,17 +179,20 @@ namespace PRS_bootcamp.Controllers
             }
             pr.Copy(cart.request);
 
-            if (cart.items != null)
+            if (cart.lineitems != null)
             {
                 PurchaseRequestLineItem item = null;
-                foreach (PurchaseRequestLineItem li in cart.items)
+                foreach (PurchaseRequestLineItem li in cart.lineitems)
                 {
                     item = db.PurchaseRequestLineItems.Find(li.Id);
                     if (item == null)
                     {
                         db.PurchaseRequestLineItems.Add(li);
                     }
-                    item.Copy(li);
+                    else
+                    {
+                        item.Copy(li);
+                    }
                 }
             }
 

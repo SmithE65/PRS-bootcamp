@@ -22,9 +22,7 @@ namespace PRS_bootcamp.Models
         {
             Id = lineItem.Id;
             PurchaseRequestId = lineItem.PurchaseRequestId;
-            PurchaseRequest = lineItem.PurchaseRequest;
             ProductId = lineItem.ProductId;
-            Product = lineItem.Product;
             Quantity = lineItem.Quantity;
         }
     }

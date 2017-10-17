@@ -41,7 +41,6 @@ namespace PRS_bootcamp.Models
         {
             Id = purchaseRequest.Id;
             UserId = purchaseRequest.UserId;
-            User = purchaseRequest.User;
             Description = purchaseRequest.Description;
             Justification = purchaseRequest.Justification;
             DateNeeded = purchaseRequest.DateNeeded;

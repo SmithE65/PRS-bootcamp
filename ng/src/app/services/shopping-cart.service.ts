@@ -40,8 +40,10 @@ export class ShoppingCartService {
   // gets purchase request for current user
   load(userid: number): void
   {
+    console.log("load called");
     if (!this.sysService.loggedIn)  // if nobody's logged in, load will fail
       return;
+    console.log("load continued");
 
     // until we get a new api call......
     // get all requests by user
@@ -69,6 +71,12 @@ export class ShoppingCartService {
     }
   }
 
+  unload(): void
+  {
+    this.currentItems = null;
+    this.currentRequest = null;
+  }
+
   update(): void
   {
 
@@ -87,7 +95,7 @@ export class ShoppingCartService {
       1,                                // IP or CART status -- TO DO: pull id from db by Description string
       new Date());
 
-    console.log("createRequest() called; not functioning")
+    this.requestService.add(request).then(resp => console.log(resp, "New cart created."));
   }
 
   private getItems(): void

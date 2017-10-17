@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
         this.systemService.currentUser = null;  // remove current user
         this.systemService.loggedIn = false;    // set logged-in flag to false
         this.systemService.delete();            // remove user from local storage
+        this.cartService.unload();              // clean up shopping cart
         this.router.navigate(['/home']);        // go back to the home page
     }
 

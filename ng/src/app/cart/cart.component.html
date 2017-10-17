@@ -1,3 +1,10 @@
-<p>
-  cart works!
+<p *ngIf="sysService.currentUser">
+  Welcome {{sysService.currentUser.UserName}}!
+</p>
+<p *ngIf="!sysService.currentUser">
+  Please log in to use the cart.
+</p>
+
+<p *ngIf="cartService.currentRequest">
+  You have a cart!
 </p>

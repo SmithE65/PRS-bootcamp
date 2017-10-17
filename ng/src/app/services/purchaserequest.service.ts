@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/switchMap';
 
 // models
+import { Cart } from '../models/cart';
 import { LineItem } from '../models/lineitem';
 import { PurchaseRequest } from '../models/purchaserequest';
 
@@ -43,6 +44,13 @@ export class PurchaseRequestService {
     return this.http.get(url).toPromise().then(resp => resp.json() as PurchaseRequest[]).catch(this.handleError);
   }
 
+  // gets a whole cart (request & lineitems) from the server
+  getCart(id: number): Promise<Cart>
+  {
+    let url = urlBase + "GetCart/" + id;
+    return this.http.get(url).toPromise().then(resp => resp.json() as Cart).catch(this.handleError);
+  }
+
   // gets all lineitems attached to PurchaseRequestId
   getItems(id: number): Promise<LineItem[]>
   {
@@ -62,6 +70,13 @@ export class PurchaseRequestService {
   {
     let url = urlBase + "Update";
     return this.http.post(url, pr).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
+  }
+
+  // posts a whole cart (request & lineitems) to the server
+  updateCart(cart: Cart): Promise<any>
+  {
+    let url = urlBase + "UpdateCart";
+    return this.http.post(url, cart).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
   }
 
   // handle any errors... or don't... w/e

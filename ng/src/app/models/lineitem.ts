@@ -4,7 +4,7 @@ import { PurchaseRequest } from './purchaserequest';
 export class LineItem
 {
   Id: number;
-  RequestId: number;
+  PurchaseRequestId: number;
   Request: PurchaseRequest;
   ProductId: number;
   Product: Product;
@@ -17,7 +17,7 @@ export class LineItem
     quantity: number
   ) {
     this.Id = id;
-    this.RequestId = requestId;
+    this.PurchaseRequestId = requestId;
     this.ProductId = productId;
     this.Quantity = quantity;
   }

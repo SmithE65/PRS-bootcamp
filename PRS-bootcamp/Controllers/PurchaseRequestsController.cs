@@ -18,6 +18,11 @@ namespace PRS_bootcamp.Controllers
 
         private const string bind = "Id,UserId,Description,Justification,DateNeeded,DeliveryMode,StatusId,Total,SubmittedDate,ReasonForRejection";
 
+        /// <summary>
+        /// Sums all LineItems where PurchaseRequestId matches id
+        /// </summary>
+        /// <param name="id">PurchaseRequest Id</param>
+        /// <returns>JSON formatted success or error messages.</returns>
         public ActionResult UpdateTotal(int? id)
         {
             if (id == null || id <= 0)
@@ -194,6 +199,7 @@ namespace PRS_bootcamp.Controllers
                 numChanges = db.SaveChanges();
                 return Json(new Msg { Result = "Success", Message = $"Cart: {numChanges} items updated." }, JsonRequestBehavior.AllowGet);
             }
+            UpdateTotal(pr.Id);
 
             return Json(new Msg { Result = "Error", Message = "Cart: ModelState invalid." }, JsonRequestBehavior.AllowGet);
         }

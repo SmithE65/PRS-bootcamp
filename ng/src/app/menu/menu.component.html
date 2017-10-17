@@ -16,7 +16,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="/cart">Shopping Cart</a></li>
+        <li><a routerLink="/cart">Shopping Cart ({{cartService.total | currency:'USD':true}})</a></li>
 
         <li><a routerLink="/review" *ngIf="systemService.loggedIn && systemService.currentUser.IsReviewer">Review</a></li>
 

@@ -20,6 +20,7 @@ export class ShoppingCartService {
 
   currentRequest: PurchaseRequest;  // our 'cart'
   currentItems: LineItem[];         // array of line items in our cart
+  total: number = 0;                // total external to currentRequest to keep template from breaking
 
   ready: boolean = false; // do we have a cart to work with?
 
@@ -53,6 +54,7 @@ export class ShoppingCartService {
       if (request.Status.Description == "IP")
       {
         this.currentRequest = request;
+        this.total = request.Total;
         break;
       }
     }

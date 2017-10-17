@@ -10,6 +10,12 @@ namespace PRS_bootcamp.Controllers
     {
         private PRS_bootcampContext db = new PRS_bootcampContext();
 
+        public struct Cart
+        {
+            public PurchaseRequest request;
+            public List<PurchaseRequestLineItem> items;
+        }
+
         private const string bind = "Id,UserId,Description,Justification,DateNeeded,DeliveryMode,StatusId,Total,SubmittedDate,ReasonForRejection";
 
         public ActionResult UpdateTotal(int? id)
@@ -70,6 +76,24 @@ namespace PRS_bootcamp.Controllers
             }
 
             return new JsonNetResult { Data = purchaseRequest };
+        }
+
+        public ActionResult GetCart(int? id)
+        {
+            if (id == null || id <= 0)
+            {
+                return Json(new Msg { Result = "Error", Message = "GetCart: id either null or invalid" }, JsonRequestBehavior.AllowGet);
+            }
+
+            PurchaseRequest pr = db.PurchaseRequests.Find(id);
+            if (pr == null)
+            {
+                return Json(new Msg { Result = "Error", Message = "GetCart: invalid request id." });
+            }
+
+            var lineitems = db.PurchaseRequestLineItems.Where(i => i.PurchaseRequestId == pr.Id).ToList();
+
+            return new JsonNetResult { Data = new Cart { request = pr, items = lineitems } };
         }
 
         public ActionResult GetByUser(int? id)
@@ -134,6 +158,44 @@ namespace PRS_bootcamp.Controllers
             }
 
             return Json(new Msg { Result = "Error", Message = $"ModelState invalid; {numChanges} record(s) updated." }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult UpdateCart([System.Web.Http.FromBody] Cart cart)
+        {
+            if (cart.request == null)
+            {
+                return Json(new Msg { Result = "Error", Message = "Cart: null request." }, JsonRequestBehavior.AllowGet);
+            }
+
+            PurchaseRequest pr = db.PurchaseRequests.Find(cart.request.Id);
+            if (pr == null)
+            {
+                return Json(new Msg { Result = "Error", Message = "Cart: invalid Id." }, JsonRequestBehavior.AllowGet);
+            }
+            pr.Copy(cart.request);
+
+            if (cart.items != null)
+            {
+                PurchaseRequestLineItem item = null;
+                foreach (PurchaseRequestLineItem li in cart.items)
+                {
+                    item = db.PurchaseRequestLineItems.Find(li.Id);
+                    if (item == null)
+                    {
+                        db.PurchaseRequestLineItems.Add(li);
+                    }
+                    item.Copy(li);
+                }
+            }
+
+            int numChanges = 0;
+            if (ModelState.IsValid)
+            {
+                numChanges = db.SaveChanges();
+                return Json(new Msg { Result = "Success", Message = $"Cart: {numChanges} items updated." }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new Msg { Result = "Error", Message = "Cart: ModelState invalid." }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

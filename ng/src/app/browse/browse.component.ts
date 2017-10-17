@@ -16,9 +16,11 @@ export class BrowseComponent implements OnInit {
 
   products: Product[];
 
-  addtocart(id: number): void
+  addtocart(product: Product): void
   {
+    console.log("Cart product:", product);
     // add the thing to the cart
+    this.cartService.addProduct(product);
     this.router.navigate(['/cart']); // go to the cart
   }
 

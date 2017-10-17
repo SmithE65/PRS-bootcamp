@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Product } from '../models/product';
 
@@ -15,6 +16,12 @@ export class BrowseComponent implements OnInit {
 
   products: Product[];
 
+  addtocart(id: number): void
+  {
+    // add the thing to the cart
+    this.router.navigate(['/cart']); // go to the cart
+  }
+
   getProducts(): void
   {
     this.productService.list().then(resp => this.products = resp);
@@ -23,7 +30,8 @@ export class BrowseComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: ShoppingCartService,
-    private sysService: SystemService
+    private sysService: SystemService,
+    private router: Router
   ) { }
 
   ngOnInit() {

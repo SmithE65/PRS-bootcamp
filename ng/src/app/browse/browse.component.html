@@ -4,6 +4,7 @@
   <div class="panel panel-primary" *ngFor="let product of products">
     <div class="panel-heading">
       <a style="color: white;" routerLink="/products/detail/{{product.Id}}">{{product.Name}}</a>
+      <button class="btn" (click)="addtocart(product.Id)">Add to Cart</button>
     </div>
     <div class="panel-body">
       <div class="col-sm-9">

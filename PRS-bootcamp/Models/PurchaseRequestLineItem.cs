@@ -31,6 +31,7 @@ namespace PRS_bootcamp.Models
             PurchaseRequestId = lineItem.PurchaseRequestId;
             ProductId = lineItem.ProductId;
             Quantity = lineItem.Quantity;
+            IsFulfilled = lineItem.IsFulfilled;
         }
     }
 }

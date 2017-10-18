@@ -50,7 +50,8 @@ export class ShoppingCartService {
   // check and see if there is already a product in the cart
   checkProduct(id: number): boolean
   {
-    if (this.currentItems == undefined)
+    console.log("checkProduct():", this.currentItems);
+    if (this.currentItems == null)
       return false; // for some reason we don't have any items
 
     if (this.currentItems.find(i => i.ProductId == id))
@@ -64,6 +65,8 @@ export class ShoppingCartService {
   {
     if (!this.sysService.loggedIn)  // if nobody's logged in, load will fail
       return;
+
+    this.unload();  // clear everything before we reload data
 
     // until we get a new api call......
     // get all requests by user

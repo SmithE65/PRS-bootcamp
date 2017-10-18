@@ -38,6 +38,11 @@ namespace PRS_bootcamp.Controllers
             return new JsonNetResult { Data = status };
         }
 
+        public ActionResult GetByDesc(string desc)
+        {
+            return new JsonNetResult { Data = db.Status.Where(s => s.Description == desc).ToList() };
+        }
+
         public ActionResult List()
         {
             return new JsonNetResult { Data = db.Status.ToList() };

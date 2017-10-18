@@ -1,11 +1,15 @@
+// angular core
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
+// rxjs
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/switchMap';
 
+// models
 import { Status } from '../models/status';
 
+// API base
 const urlBase: string = "http://localhost:51910/Status/";
 
 @Injectable()
@@ -27,6 +31,12 @@ export class StatusService {
   {
     let url = urlBase + "Get/" + id;
     return this.http.get(url).toPromise().then(resp => resp.json() as Status).catch(this.handleError);
+  }
+
+  getbydesc(desc: string): Promise<Status[]>
+  {
+    let url = urlBase + "GetByDesc?desc=" + desc;
+    return this.http.get(url).toPromise().then(resp => resp.json() as Status[]).catch(this.handleError);
   }
 
   list(): Promise<Status[]>

@@ -10,12 +10,12 @@ export class SystemService {
 
     save(): void
     {
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        sessionStorage.setItem('currentUser', JSON.stringify(this.currentUser));
     }
 
     load(): void
     {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         if (this.currentUser)
         {
             this.loggedIn = true;
@@ -28,7 +28,7 @@ export class SystemService {
 
     delete(): void
     {
-        localStorage.removeItem('currentUser');
+        sessionStorage.removeItem('currentUser');
     }
 
   constructor() { }

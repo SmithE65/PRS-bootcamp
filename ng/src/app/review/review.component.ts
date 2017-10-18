@@ -7,6 +7,7 @@ import { Status } from '../models/status';
 
 import { PurchaseRequestService } from '../services/purchaserequest.service';
 import { StatusService } from '../services/status.service';
+import { SystemService } from '../services/system.service';
 
 @Component({
   selector: 'app-review',
@@ -32,7 +33,8 @@ export class ReviewComponent implements OnInit {
 
   constructor(
     private requestService: PurchaseRequestService,
-    private statusService: StatusService
+    private statusService: StatusService,
+    private sysService: SystemService
   ) { }
 
   ngOnInit() {

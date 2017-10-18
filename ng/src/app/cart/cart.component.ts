@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
 // services
+import { PrLineItemService } from '../services/pr-line-item.service';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { SystemService } from '../services/system.service';
 
@@ -17,18 +18,29 @@ export class CartComponent implements OnInit {
 
   debug(msg: any): void
   {
-    console.log(msg);
+    console.log(this.cartService.currentItems);
+  }
+
+  delete(id: number): void
+  {
+    this.lineitemService.delete(id).then(resp => { console.log(resp); this.cartService.load() });
+  }
+
+  update(): void
+  {
+    this.cartService.update();
   }
 
   constructor(
     private cartService: ShoppingCartService,
+    private lineitemService: PrLineItemService,
     private sysService: SystemService
   ) { }
 
   ngOnInit() {
     if (this.sysService.loggedIn)
     {
-      this.cartService.load(this.sysService.currentUser.Id);
+      this.cartService.load();
     }
   }
 

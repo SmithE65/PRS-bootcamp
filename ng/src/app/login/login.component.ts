@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
             this.systemService.currentUser = users[0];  // log in at the system level
             this.systemService.loggedIn = true;
             this.systemService.save();
-            this.cartService.load(users[0].Id);  // if we have a valid user, we should load the cart
+            this.cartService.load();  // if we have a valid user, we should load the cart
             this.router.navigate(['/home']);  // success! go to home page
         }
     }

@@ -34,10 +34,14 @@ export class ShoppingCartService {
     {
       let item = new LineItem(0, this.currentRequest.Id, product.Id, 1);
       console.log(item);
-      this.currentItems.push(item);
-      this.update();
+      this.lineItemService.add(item).then(resp => { console.log(resp); this.load() });
       console.log("Product added and updated.");
     }
+  }
+
+  removeProduct(product: Product): void
+  {
+
   }
 
   // check and see if there is already a product in the cart
@@ -51,14 +55,14 @@ export class ShoppingCartService {
   }
 
   // gets purchase request for current user
-  load(userid: number): void
+  load(): void
   {
     if (!this.sysService.loggedIn)  // if nobody's logged in, load will fail
       return;
 
     // until we get a new api call......
     // get all requests by user
-    this.requestService.getByUser(userid).then(resp => this.loadProc(resp));
+    this.requestService.getByUser(this.sysService.currentUser.Id).then(resp => this.loadProc(resp));
   }
 
   loadProc(requests: PurchaseRequest[]): void
@@ -93,10 +97,9 @@ export class ShoppingCartService {
   update(): void
   {
     let cart: Cart = new Cart(this.currentRequest, this.currentItems);    // build a cart
-    this.requestService.updateCart(cart).then(resp => console.log(resp)); // ship it off to the interwebs
+    this.requestService.updateCart(cart).then(resp => { console.log(resp); this.load() }); // ship it off to the interwebs & drag it right back
     console.log("update():", cart);
-    // reload data to ensure local data matches server
-    this.load(this.currentRequest.UserId);
+    
     this.total = this.currentRequest.Total;
   }
 
@@ -127,6 +130,7 @@ export class ShoppingCartService {
 
 
   constructor(
+    private lineItemService: PrLineItemService,
     private requestService: PurchaseRequestService,
     private sysService: SystemService
   ) { }

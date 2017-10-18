@@ -14,6 +14,7 @@ import { Status } from '../models/status';
 // services
 import { PurchaseRequestService } from '../services/purchaserequest.service';
 import { PrLineItemService } from '../services/pr-line-item.service';
+import { StatusService } from '../services/status.service';
 import { SystemService } from '../services/system.service';
 
 @Injectable()
@@ -105,6 +106,7 @@ export class ShoppingCartService {
     this.total = this.currentRequest.Total;
   }
 
+  // creates a new purchase request -- called when none match cart criteria
   private createRequest(): void
   {
     let request: PurchaseRequest = new PurchaseRequest(
@@ -117,6 +119,15 @@ export class ShoppingCartService {
       0,                                // current total
       1,                                // IP or CART status -- TO DO: pull id from db by Description string
       new Date());
+
+    // Find an ID in the db for "IP", if none exists stick to default of 1
+    let status: Status[];
+    this.statusService.getbydesc("IP").then(resp => status = resp);
+
+    if (status != undefined && status[0] != undefined)
+    {
+      request.StatusId = status[0].Id;
+    }
 
     this.requestService.add(request).then(resp => console.log(resp, "New cart created."));
   }
@@ -134,6 +145,7 @@ export class ShoppingCartService {
   constructor(
     private lineItemService: PrLineItemService,
     private requestService: PurchaseRequestService,
+    private statusService: StatusService,
     private sysService: SystemService
   ) { }
 

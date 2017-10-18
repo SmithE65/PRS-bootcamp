@@ -30,5 +30,7 @@ namespace PRS_bootcamp.Models
         public System.Data.Entity.DbSet<PRS_bootcamp.Models.Status> Status { get; set; }
 
         public System.Data.Entity.DbSet<PRS_bootcamp.Models.PurchaseRequestLineItem> PurchaseRequestLineItems { get; set; }
+
+        public System.Data.Entity.DbSet<PRS_bootcamp.Models.Message> Messages { get; set; }
     }
 }

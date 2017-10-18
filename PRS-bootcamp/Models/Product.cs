@@ -46,6 +46,7 @@ namespace PRS_bootcamp.Models
             Vendor = product.Vendor;
             VendorPartNumber = product.VendorPartNumber;
             Name = product.Name;
+            Description = product.Description;
             Price = product.Price;
             Unit = product.Unit;
             Photopath = product.Photopath;

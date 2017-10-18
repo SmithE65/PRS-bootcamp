@@ -8,7 +8,7 @@ namespace PRS_bootcamp.Controllers
     public class PurchaseRequestLineItemsController : Controller
     {
         private PRS_bootcampContext db = new PRS_bootcampContext();
-        private const string bind = "Id,PurchaseRequestId,ProductId,Quantity";
+        private const string bind = "Id,PurchaseRequestId,ProductId,Quantity,IsFulfilled";
 
         public ActionResult UpdateTotal(int? id)
         {

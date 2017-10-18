@@ -1,12 +1,12 @@
-import { LineItem } from './lineitem';
+import { PurchaseRequestLineItem } from './lineitem';
 import { PurchaseRequest } from './purchaserequest';
 
 export class Cart
 {
   request: PurchaseRequest;
-  lineItems: LineItem[];
+  lineItems: PurchaseRequestLineItem[];
 
-  constructor(request: PurchaseRequest, lineItems: LineItem[])
+  constructor(request: PurchaseRequest, lineItems: PurchaseRequestLineItem[])
   {
     this.request = request;
     this.lineItems = lineItems;

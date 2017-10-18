@@ -3,14 +3,14 @@ import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { LineItem } from '../models/lineitem';
+import { PurchaseRequestLineItem } from '../models/lineitem';
 
 const urlBase: string = "http://localhost:51910/PurchaseRequestLineItems/"
 
 @Injectable()
 export class PrLineItemService {
 
-  add(lineitem: LineItem): Promise<any>
+  add(lineitem: PurchaseRequestLineItem): Promise<any>
   {
     let url = urlBase + "Add";
     return this.http.post(url, lineitem).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
@@ -22,19 +22,19 @@ export class PrLineItemService {
     return this.http.get(url).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
   }
 
-  get(id: string): Promise<LineItem>
+  get(id: string): Promise<PurchaseRequestLineItem>
   {
     let url = urlBase + "Get/" + id;
-    return this.http.get(url).toPromise().then(resp => resp.json() as LineItem).catch(this.handleError);
+    return this.http.get(url).toPromise().then(resp => resp.json() as PurchaseRequestLineItem).catch(this.handleError);
   }
 
-  list(): Promise<LineItem[]>
+  list(): Promise<PurchaseRequestLineItem[]>
   {
     let url = urlBase + "List";
-    return this.http.get(url).toPromise().then(resp => resp.json() as LineItem[]).catch(this.handleError);
+    return this.http.get(url).toPromise().then(resp => resp.json() as PurchaseRequestLineItem[]).catch(this.handleError);
   }
 
-  update(lineitem: LineItem): Promise<any>
+  update(lineitem: PurchaseRequestLineItem): Promise<any>
   {
     let url = urlBase + "Update";
     return this.http.post(url, lineitem).toPromise().then(resp => resp.json() || {}).catch(this.handleError);

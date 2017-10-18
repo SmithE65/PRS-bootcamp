@@ -1,7 +1,7 @@
 import { Product } from './product';
 import { PurchaseRequest } from './purchaserequest';
 
-export class LineItem
+export class PurchaseRequestLineItem
 {
   Id: number;
   PurchaseRequestId: number;

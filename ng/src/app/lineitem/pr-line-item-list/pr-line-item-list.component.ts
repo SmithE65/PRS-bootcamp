@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
 
-import { LineItem } from '../../models/lineitem';
+import { PurchaseRequestLineItem } from '../../models/lineitem';
 
 import { PrLineItemService } from '../../services/pr-line-item.service';
 
@@ -13,7 +13,7 @@ import { PrLineItemService } from '../../services/pr-line-item.service';
 })
 export class PrLineItemListComponent implements OnInit {
 
-  lineitems: LineItem[];
+  lineitems: PurchaseRequestLineItem[];
 
   getItems(): void
   {

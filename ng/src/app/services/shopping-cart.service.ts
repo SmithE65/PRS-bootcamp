@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 // models
 import { Cart } from '../models/cart';
 import { PurchaseRequest } from '../models/purchaserequest';
-import { LineItem } from '../models/lineitem';
+import { PurchaseRequestLineItem } from '../models/lineitem';
 import { Product } from '../models/product';
 import { Status } from '../models/status';
 
@@ -20,7 +20,7 @@ import { SystemService } from '../services/system.service';
 export class ShoppingCartService {
 
   currentRequest: PurchaseRequest;  // our 'cart'
-  currentItems: LineItem[];         // array of line items in our cart
+  currentItems: PurchaseRequestLineItem[];         // array of line items in our cart
   total: number = 0;                // total external to currentRequest to keep template from breaking
 
   // adds a product to the cart (creates new LineItem)
@@ -32,7 +32,7 @@ export class ShoppingCartService {
     console.log("Checking request:", this.currentRequest);
     if (!this.checkProduct(product.Id)) // if the product doesn't already exist, add it
     {
-      let item = new LineItem(0, this.currentRequest.Id, product.Id, 1);
+      let item = new PurchaseRequestLineItem(0, this.currentRequest.Id, product.Id, 1);
       console.log(item);
       this.lineItemService.add(item).then(resp => { console.log(resp); this.load() });
       console.log("Product added and updated.");

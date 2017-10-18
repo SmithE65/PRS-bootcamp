@@ -29,6 +29,13 @@ namespace PRS_bootcamp.Controllers
             decimal total = 0;
             foreach (var item in lineItems)
             {
+                // entity framework has been returning inconsistent results and this is my workaround
+                if (item.Product == null)
+                    item.Product = db.Products.Find(item.ProductId);
+
+                if (item.Product == null)
+                    return Json(new Msg { Result = "Error", Message = "UpdateTotal: invalid ProductId." });
+
                 total += item.Product.Price * item.Quantity;
             }
             purchaseRequest.Total = total;
@@ -45,6 +52,10 @@ namespace PRS_bootcamp.Controllers
 
         public ActionResult Add([Bind(Include = bind)] PurchaseRequestLineItem purchaseRequestLineItem)
         {
+            if (purchaseRequestLineItem.PurchaseRequestId <= 0 || purchaseRequestLineItem.ProductId <= 0)
+            {
+                return Json(new Msg { Result = "Error", Message = "LineItem Add: invalid foreign key." });
+            }
             if (ModelState.IsValid)
             {
                 db.PurchaseRequestLineItems.Add(purchaseRequestLineItem);

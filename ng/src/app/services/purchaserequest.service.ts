@@ -8,7 +8,7 @@ import 'rxjs/add/operator/switchMap';
 
 // models
 import { Cart } from '../models/cart';
-import { LineItem } from '../models/lineitem';
+import { PurchaseRequestLineItem } from '../models/lineitem';
 import { PurchaseRequest } from '../models/purchaserequest';
 
 const urlBase: string = "http://localhost:51910/PurchaseRequests/";
@@ -52,10 +52,10 @@ export class PurchaseRequestService {
   }
 
   // gets all lineitems attached to PurchaseRequestId
-  getItems(id: number): Promise<LineItem[]>
+  getItems(id: number): Promise<PurchaseRequestLineItem[]>
   {
     let url = urlBase + "GetItems/" + id;
-    return this.http.get(url).toPromise().then(resp => resp.json() as LineItem[]).catch(this.handleError);
+    return this.http.get(url).toPromise().then(resp => resp.json() as PurchaseRequestLineItem[]).catch(this.handleError);
   }
 
   // get all the requests from the db

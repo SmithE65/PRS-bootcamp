@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/switchMap';
 
-import { LineItem } from '../../models/lineitem';
+import { PurchaseRequestLineItem } from '../../models/lineitem';
 
 import { PrLineItemService } from '../../services/pr-line-item.service';
 
@@ -15,7 +15,7 @@ import { PrLineItemService } from '../../services/pr-line-item.service';
 })
 export class PrLineItemEditComponent implements OnInit {
 
-  lineitem: LineItem;
+  lineitem: PurchaseRequestLineItem;
 
   getItem(): void
   {

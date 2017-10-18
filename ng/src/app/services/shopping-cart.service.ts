@@ -42,6 +42,7 @@ export class ShoppingCartService {
     }
   }
 
+  // EMPTY FUNCTION
   removeProduct(product: Product): void
   {
 
@@ -60,6 +61,13 @@ export class ShoppingCartService {
       return false;// else false
   }
 
+  // returns the id for the status.description matching desc
+  // EMPTY FUNCTION
+  getStatusId(desc: string): number
+  {
+    return 0;
+  }
+
   // gets purchase request for current user
   load(): void
   {
@@ -74,6 +82,7 @@ export class ShoppingCartService {
     this.statusService.list().then(resp => this.status = resp);
   }
 
+  // processes data retreived during load()
   loadProc(requests: PurchaseRequest[]): void
   {
     // check if we have any IP (in progress) status requests
@@ -103,9 +112,16 @@ export class ShoppingCartService {
     this.currentRequest.Status = null;
     this.currentRequest.StatusId = 2;
 
+    // set status to REVIEW unless total is less than $50, then autoaccept
+    let setStatus = "REVIEW";
+    if (this.currentRequest.Total < 50)
+    {
+      setStatus = "ACCEPTED";
+    }
+
     if (this.status != undefined)
     {
-      let s = this.status.find(st => st.Description == "REVIEW");
+      let s = this.status.find(st => st.Description == setStatus);
       if (s != undefined)
       {
         this.currentRequest.Status = s;
@@ -115,6 +131,7 @@ export class ShoppingCartService {
     this.update();
   }
 
+  // sets stored data to null
   unload(): void
   {
     this.currentItems = null;
@@ -160,6 +177,7 @@ export class ShoppingCartService {
     this.requestService.add(request).then(resp => console.log(resp, "New cart created."));
   }
 
+  // gets the lineitems for the current request
   private getItems(): void
   {
     if (!this.currentRequest)  // should not have been called, if no current request

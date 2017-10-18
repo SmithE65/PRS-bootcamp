@@ -79,16 +79,17 @@ namespace PRS_bootcamp.Controllers
         public ActionResult Remove(int? id)
         {
             if (id == null || id <= 0)
-                return Json(new Msg { Result = "Error", Message = "id either null or invalid" });
+                return Json(new Msg { Result = "Error", Message = "id either null or invalid" }, JsonRequestBehavior.AllowGet);
 
             PurchaseRequestLineItem purchaseRequestLine = db.PurchaseRequestLineItems.Find(id);
 
             if (purchaseRequestLine == null)
-                return Json(new Msg { Result = "Error", Message = "Invalid prli id." });
+                return Json(new Msg { Result = "Error", Message = "Invalid prli id." }, JsonRequestBehavior.AllowGet);
 
+            int prid = purchaseRequestLine.PurchaseRequestId;
             db.PurchaseRequestLineItems.Remove(purchaseRequestLine);
             int numChanges = db.SaveChanges();
-            UpdateTotal(purchaseRequestLine.PurchaseRequestId);
+            UpdateTotal(prid);
 
             return Json(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." }, JsonRequestBehavior.AllowGet);
         }

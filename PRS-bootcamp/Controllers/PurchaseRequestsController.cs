@@ -178,6 +178,8 @@ namespace PRS_bootcamp.Controllers
                 return Json(new Msg { Result = "Error", Message = "Cart: invalid Id." }, JsonRequestBehavior.AllowGet);
             }
             pr.Copy(cart.request);
+            pr.Status = null;
+            pr.User = null;
 
             if (cart.lineitems != null)
             {
@@ -200,9 +202,9 @@ namespace PRS_bootcamp.Controllers
             if (ModelState.IsValid)
             {
                 numChanges = db.SaveChanges();
+                UpdateTotal(pr.Id);
                 return Json(new Msg { Result = "Success", Message = $"Cart: {numChanges} items updated." }, JsonRequestBehavior.AllowGet);
             }
-            UpdateTotal(pr.Id);
 
             return Json(new Msg { Result = "Error", Message = "Cart: ModelState invalid." }, JsonRequestBehavior.AllowGet);
         }

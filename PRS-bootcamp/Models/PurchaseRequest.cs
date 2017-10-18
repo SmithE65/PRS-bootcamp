@@ -46,7 +46,6 @@ namespace PRS_bootcamp.Models
             DateNeeded = purchaseRequest.DateNeeded;
             DeliveryMode = purchaseRequest.DeliveryMode;
             StatusId = purchaseRequest.StatusId;
-            Status = purchaseRequest.Status;
             Total = purchaseRequest.Total;
             SubmittedDate = purchaseRequest.SubmittedDate;
             ReasonForRejection = purchaseRequest.ReasonForRejection;

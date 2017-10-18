@@ -94,6 +94,7 @@ export class ShoppingCartService {
   {
     this.currentItems = null;
     this.currentRequest = null;
+    this.total = 0;
   }
 
   // posts all items to the server and gets updated data from the server to stay in sync

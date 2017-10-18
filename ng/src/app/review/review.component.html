@@ -17,8 +17,9 @@
       <tr *ngFor="let review of reviews">
         <td>{{review.Status.Description}}</td>
         <td>{{review.User.UserName}}</td>
-        <td>{{review.DateNeeded}}</td>
-        <td>{{review.Total}}</td>
+        <td>{{review.DateNeeded |date:'shortDate'}}</td>
+        <td>{{review.Total | currency:'USD':true}}</td>
+        <td><a routerLink="/review/{{review.Id}}">Detail</a></td>
       </tr>
     </tbody>
   </table>

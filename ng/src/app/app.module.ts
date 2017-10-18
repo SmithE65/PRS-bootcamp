@@ -8,9 +8,12 @@ import { HttpModule }             from '@angular/http';
 // import project components and modules
 import { AppRoutingModule }       from './app-routing.module';
 import { AppComponent }           from './app.component';
-import { MenuComponent }          from './menu/menu.component';
+
+// front-page components
+import { MenuComponent } from './menu/menu.component';
 import { HeaderComponent }        from './header/header.component';
-import { HomeComponent }          from './home/home.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 import { LoginComponent }         from './login/login.component';
 
 // user-related components
@@ -53,8 +56,12 @@ import { PrLineItemListComponent }    from './lineitem/pr-line-item-list/pr-line
 // browse compent
 import { BrowseComponent } from './browse/browse.component';
 
-// shopping car component
+// shopping cart component
 import { CartComponent } from './cart/cart.component';
+
+// review component
+import { ReviewComponent } from './review/review.component';
+import { ReviewDetailComponent } from './review/review-detail/review-detail.component';
 
 // import services
 import { PrLineItemService }      from './services/pr-line-item.service';
@@ -65,9 +72,6 @@ import { StatusService }          from './services/status.service';
 import { SystemService }          from './services/system.service';
 import { UserService }            from './services/user.service';
 import { VendorService }          from './services/vendor.service';
-import { AboutComponent } from './about/about.component';
-import { ReviewComponent } from './review/review.component';
-
 
 @NgModule({
   declarations: [
@@ -111,7 +115,9 @@ import { ReviewComponent } from './review/review.component';
     // Components for browsing products and filling out purchase requests
     BrowseComponent,
     CartComponent,
-    ReviewComponent
+    // Components for reviewing requests
+    ReviewComponent,
+    ReviewDetailComponent
   ],
   imports: [
     BrowserModule,

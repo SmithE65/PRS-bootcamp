@@ -51,7 +51,7 @@ export class PurchaseRequestService {
   }
 
   // gets a whole cart (request & lineitems) from the server
-  getCart(id: number): Promise<Cart>
+  getCart(id: string): Promise<Cart>
   {
     let url = urlBase + "GetCart/" + id;
     return this.http.get(url).toPromise().then(resp => resp.json() as Cart).catch(this.handleError);
@@ -82,7 +82,7 @@ export class PurchaseRequestService {
   updateCart(cart: Cart): Promise<any>
   {
     let url = urlBase + "UpdateCart";
-    console.log("UpdateCart:", cart);
+    //console.log("UpdateCart:", cart);
     return this.http.post(url, cart).toPromise().then(resp => resp.json() || {}).catch(this.handleError);
   }
 

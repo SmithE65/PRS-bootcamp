@@ -48,6 +48,7 @@ import { CartComponent } from './cart/cart.component';
 
 // request review component
 import { ReviewComponent } from './review/review.component';
+import { ReviewDetailComponent } from './review/review-detail/review-detail.component';
 
 
 const routes: Routes = [
@@ -90,7 +91,8 @@ const routes: Routes = [
     // shopping cart related routes
     { path: "cart", component: CartComponent },
     // request review related routes
-    { path: "review", component: ReviewComponent }
+    { path: "review", component: ReviewComponent },
+    { path: "review/:id", component: ReviewDetailComponent }
 ];
 
 

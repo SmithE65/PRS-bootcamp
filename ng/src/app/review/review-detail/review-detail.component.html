@@ -1,0 +1,67 @@
+<p>
+  review-detail works!
+</p>
+
+<div class="container">
+  <table *ngIf="request">
+    <tr>
+      <th>Id</th>
+      <td>{{request.Id}}</td>
+    </tr>
+    <tr>
+      <th>User</th>
+      <td>{{request.User.UserName}}</td>
+    </tr>
+    <tr>
+      <th>User Email</th>
+      <td>{{request.User.Email}}</td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td>{{request.Status.Description}}</td>
+    </tr>
+    <tr>
+      <th>Date Submitted</th>
+      <td>{{request.SubmittedDate | date:'shortDate'}}</td>
+    </tr>
+    <tr>
+      <th>Date Needed</th>
+      <td>{{request.DateNeeded | date:'shortDate'}}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="container">
+  <table class="table table-bordered table-striped" *ngIf="lineitems">
+    <thead>
+      <tr class="bg-primary">
+        <td>Name</td>
+        <td>Vendor</td>
+        <td>Unit</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>Subtotal</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of lineitems">
+        <td>{{item.Product.Name}}</td>
+        <td>{{item.Product.Vendor.Name}}</td>
+        <td>{{item.Product.Unit}}</td>
+        <td>{{item.Product.Price | currency:'USD':true}}</td>
+        <td>{{item.Quantity}}</td>
+        <td>{{item.Quantity * item.Product.Price | currency:'USD':true}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form class="form-inline">
+    <button class="btn btn-info" (click)="debug()">Debug</button>
+    <button class="btn btn-success" (click)="accept()">Accept</button>
+    <button class="btn btn-danger" (click)="reject()">Reject</button>
+    <div class="form-group" *ngIf="request">
+      <label for="reasonforrejection">Reason for Rejection</label>
+      <input class="form-control" id="reasonforrejection" type="text" size="60" name="RejectionReason" [(ngModel)]="request.ReasonForRejection" />
+    </div>
+  </form>
+</div>

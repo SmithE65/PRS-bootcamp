@@ -29,16 +29,16 @@ export class ShoppingCartService {
   // adds a product to the cart (creates new LineItem)
   addProduct(product: Product): void
   {
-    console.log("Adding product:", product);
+    //console.log("Adding product:", product);
     if (!this.currentRequest)  // we can't add a product to a cart that doesn't exist
       return;
-    console.log("Checking request:", this.currentRequest);
+    //console.log("Checking request:", this.currentRequest);
     if (!this.checkProduct(product.Id)) // if the product doesn't already exist, add it
     {
       let item = new PurchaseRequestLineItem(0, this.currentRequest.Id, product.Id, 1);
-      console.log(item);
+      //console.log(item);
       this.lineItemService.add(item).then(resp => { console.log(resp); this.load() });
-      console.log("Product added and updated.");
+      //console.log("Product added and updated.");
     }
   }
 
@@ -50,7 +50,7 @@ export class ShoppingCartService {
   // check and see if there is already a product in the cart
   checkProduct(id: number): boolean
   {
-    console.log("checkProduct():", this.currentItems);
+    //console.log("checkProduct():", this.currentItems);
     if (this.currentItems == null)
       return false; // for some reason we don't have any items
 
@@ -127,7 +127,7 @@ export class ShoppingCartService {
   {
     let cart: Cart = new Cart(this.currentRequest, this.currentItems);    // build a cart
     this.requestService.updateCart(cart).then(resp => { console.log(resp); this.load() }); // ship it off to the interwebs & drag it right back
-    console.log("update():", cart);
+    //console.log("update():", cart);
     
     //this.total = this.currentRequest.Total;
   }

@@ -47,7 +47,9 @@ export class ShoppingCartService {
   // check and see if there is already a product in the cart
   checkProduct(id: number): boolean
   {
-    console.log("Checking product: " + id);
+    if (this.currentItems == undefined)
+      return false; // for some reason we don't have any items
+
     if (this.currentItems.find(i => i.ProductId == id))
       return true; // if we found a match, return true
     else

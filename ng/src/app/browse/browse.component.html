@@ -4,7 +4,8 @@
   <div class="panel panel-primary" *ngFor="let product of products">
     <div class="panel-heading">
       <a style="color: white;" routerLink="/products/detail/{{product.Id}}">{{product.Name}}</a>
-      <button class="btn" (click)="addtocart(product)">Add to Cart</button>
+      <button class="btn btn-sm" *ngIf="checkCart(product.Id)" (click)="addToCart(product)">Add to Cart</button>
+      <button class="btn btn-sm" *ngIf="!checkCart(product.Id)" (click)="viewCart()">View Cart</button>
     </div>
     <div class="panel-body">
       <div class="col-sm-9">

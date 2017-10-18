@@ -16,7 +16,7 @@ export class BrowseComponent implements OnInit {
 
   products: Product[];
 
-  addtocart(product: Product): void
+  addToCart(product: Product): void
   {
     console.log("Cart product:", product);
     // add the thing to the cart
@@ -24,9 +24,19 @@ export class BrowseComponent implements OnInit {
     this.router.navigate(['/cart']); // go to the cart
   }
 
+  checkCart(id: number): boolean
+  {
+    return this.cartService.checkProduct(id);
+  }
+
   getProducts(): void
   {
     this.productService.list().then(resp => this.products = resp);
+  }
+
+  viewCart(): void
+  {
+    this.router.navigate(['/cart']);
   }
 
   constructor(

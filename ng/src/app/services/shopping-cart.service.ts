@@ -24,6 +24,8 @@ export class ShoppingCartService {
   currentItems: PurchaseRequestLineItem[];         // array of line items in our cart
   total: number = 0;                // total external to currentRequest to keep template from breaking
 
+  status: Status[]; // get a list of all status everytime we load
+
   // adds a product to the cart (creates new LineItem)
   addProduct(product: Product): void
   {
@@ -66,6 +68,7 @@ export class ShoppingCartService {
     // until we get a new api call......
     // get all requests by user
     this.requestService.getByUser(this.sysService.currentUser.Id).then(resp => this.loadProc(resp));
+    this.statusService.list().then(resp => this.status = resp);
   }
 
   loadProc(requests: PurchaseRequest[]): void
@@ -90,6 +93,25 @@ export class ShoppingCartService {
     }
   }
 
+  // marks current request as REVIEW and creates a new one
+  submit(): void
+  {
+    // TO-DO: pull status from db by desc "REVIEW"
+    this.currentRequest.Status = null;
+    this.currentRequest.StatusId = 2;
+
+    if (this.status != undefined)
+    {
+      let s = this.status.find(st => st.Description == "REVIEW");
+      if (s != undefined)
+      {
+        this.currentRequest.Status = s;
+        this.currentRequest.StatusId = s.Id;
+      }
+    }
+    this.update();
+  }
+
   unload(): void
   {
     this.currentItems = null;
@@ -104,7 +126,7 @@ export class ShoppingCartService {
     this.requestService.updateCart(cart).then(resp => { console.log(resp); this.load() }); // ship it off to the interwebs & drag it right back
     console.log("update():", cart);
     
-    this.total = this.currentRequest.Total;
+    //this.total = this.currentRequest.Total;
   }
 
   // creates a new purchase request -- called when none match cart criteria
@@ -122,12 +144,14 @@ export class ShoppingCartService {
       new Date());
 
     // Find an ID in the db for "IP", if none exists stick to default of 1
-    let status: Status[];
-    this.statusService.getbydesc("IP").then(resp => status = resp);
-
-    if (status != undefined && status[0] != undefined)
+    if (this.status != undefined)
     {
-      request.StatusId = status[0].Id;
+      let s = this.status.find(st => st.Description == "IP");
+      if (s != undefined)
+      {
+        request.StatusId = s.Id;
+        request.Status = s;
+      }
     }
 
     this.requestService.add(request).then(resp => console.log(resp, "New cart created."));

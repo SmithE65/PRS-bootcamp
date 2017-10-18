@@ -1,3 +1,25 @@
 <p>
   review works!
 </p>
+
+<div class="container">
+  <table class="table table-bordered table-striped" *ngIf="reviews">
+    <thead>
+      <tr>
+        <td>Status</td>
+        <td>User</td>
+        <td>Date Needed</td>
+        <td>Total</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let review of reviews">
+        <td>{{review.Status.Description}}</td>
+        <td>{{review.User.UserName}}</td>
+        <td>{{review.DateNeeded}}</td>
+        <td>{{review.Total}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

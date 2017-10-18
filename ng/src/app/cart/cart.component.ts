@@ -1,5 +1,6 @@
 // angular
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // rxjs
 import 'rxjs/add/operator/toPromise';
@@ -26,6 +27,12 @@ export class CartComponent implements OnInit {
     this.lineitemService.delete(id).then(resp => { console.log(resp); this.cartService.load() });
   }
 
+  submit(): void
+  {
+    this.cartService.submit();
+    this.router.navigate(['/home']);
+  }
+
   update(): void
   {
     this.cartService.update();
@@ -34,6 +41,7 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: ShoppingCartService,
     private lineitemService: PrLineItemService,
+    private router: Router,
     private sysService: SystemService
   ) { }
 

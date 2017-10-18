@@ -37,6 +37,12 @@ export class PurchaseRequestService {
     return this.http.get(url).toPromise().then(resp => resp.json() as PurchaseRequest).catch(this.handleError);
   }
 
+  getByStatus(id: number): Promise<PurchaseRequest[]>
+  {
+    let url = urlBase + "GetByStatus/" + id;
+    return this.http.get(url).toPromise().then(resp => resp.json() as PurchaseRequest[]).catch(this.handleError);
+  }
+
   // get all requests by a given user
   getByUser(id: number): Promise<PurchaseRequest[]>
   {

@@ -101,6 +101,16 @@ namespace PRS_bootcamp.Controllers
             return new JsonNetResult { Data = new Cart { request = pr, lineitems = lineitems } };
         }
 
+        /// <summary>
+        /// Returns all purchase requests with the provided status ID
+        /// </summary>
+        /// <param name="id">Status ID</param>
+        /// <returns>List of PurchaseRequest objects</returns>
+        public ActionResult GetByStatus(int? id)
+        {
+            return new JsonNetResult { Data = db.PurchaseRequests.Where(pr => pr.StatusId == id).ToList() };
+        }
+
         public ActionResult GetByUser(int? id)
         {
             if (id == null || id <= 0)

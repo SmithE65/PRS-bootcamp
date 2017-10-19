@@ -3,8 +3,8 @@
 </p>
 
 <div class="container">
-  <div class="jumbotron">
-    <form class="form form-horizontal" *ngIf="!systemService.loggedIn">
+  <div class="jumbotron" *ngIf="!systemService.loggedIn">
+    <form class="form form-horizontal">
 
       <p>{{message}}</p>
 
@@ -22,10 +22,11 @@
         <button (click)="login()" id="login" class="col-md-1 col-md-offset-3 btn btn-primary" style="min-width:80px">Click Me</button>
       </div>
     </form>
-    <div *ngIf="systemService.loggedIn">
-      <p>Logged in as {{systemService.currentUser.UserName}}.</p>
-      <button class="btn" (click)="logout()">Sign Out</button>
-    </div>
+  </div>
+
+  <div class="jumbotron" *ngIf="systemService.loggedIn" style="max-width:400px;">
+    <p>Logged in as {{systemService.currentUser.UserName}}.</p>
+    <button class="btn" (click)="logout()">Sign Out</button>
   </div>
 </div>
 

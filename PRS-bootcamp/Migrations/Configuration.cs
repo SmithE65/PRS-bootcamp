@@ -31,7 +31,7 @@ namespace PRS_bootcamp.Migrations
 
             context.Users.AddOrUpdate(u => u.UserName,
                 new User { UserName = "admin", Password = "admin", FirstName = "admin", LastName = "admin", Phone = "5555555555", Email = "email-address", IsAdmin = true, IsReviewer = true },
-                new User { UserName = "user", Password = "user", FirstName = "user", LastName = "user", Phone = "5555555555", Email = "email-address", IsAdmin = true, IsReviewer = true }
+                new User { UserName = "user", Password = "user", FirstName = "user", LastName = "user", Phone = "5555555555", Email = "email-address", IsAdmin = false, IsReviewer = true }
                 );
 
             context.Vendors.AddOrUpdate(v => v.Code,
@@ -40,10 +40,10 @@ namespace PRS_bootcamp.Migrations
                 );
 
             context.Products.AddOrUpdate(p => p.Name,
-                new Product { VendorId = 1, VendorPartNumber = "1", Name = "Part1", Price = 1, Unit = "Ea." },
-                new Product { VendorId = 2, VendorPartNumber = "1", Name = "Part2", Price = 2, Unit = "Ea." },
-                new Product { VendorId = 2, VendorPartNumber = "2", Name = "Part3", Price = 3, Unit = "Ea." },
-                new Product { VendorId = 1, VendorPartNumber = "2", Name = "Part4", Price = 4, Unit = "Ea." }
+                new Product { VendorId = 1, VendorPartNumber = "1", Name = "Part1", Description = "This is one part of a whole.", Price = 1, Unit = "Ea." },
+                new Product { VendorId = 2, VendorPartNumber = "1", Name = "Part2", Description = "This is two parts of a whole.", Price = 2, Unit = "Ea." },
+                new Product { VendorId = 2, VendorPartNumber = "2", Name = "Part3", Description = "This is three parts of a whole.", Price = 3, Unit = "Ea." },
+                new Product { VendorId = 1, VendorPartNumber = "2", Name = "Part4", Description = "This is four parts of a whole.", Price = 4, Unit = "Ea." }
                 );
 
             context.Status.AddOrUpdate(s => s.Description,
@@ -54,9 +54,9 @@ namespace PRS_bootcamp.Migrations
                 new Status { Description = "FULFILLED" }
                 );
 
-            context.PurchaseRequests.AddOrUpdate(p => p.Description,
-                new PurchaseRequest { UserId = 1, Description = "desc1", Justification = "just", DateNeeded = DateTime.Now.AddDays(7), DeliveryMode = "Santa", StatusId = 1, SubmittedDate = DateTime.Now, Total = 0 }
-                );
+            //context.PurchaseRequests.AddOrUpdate(p => p.Description,
+            //    new PurchaseRequest { UserId = 1, Description = "desc1", Justification = "just", DateNeeded = DateTime.Now.AddDays(7), DeliveryMode = "Santa", StatusId = 1, SubmittedDate = DateTime.Now, Total = 0 }
+            //    );
         }
     }
 }

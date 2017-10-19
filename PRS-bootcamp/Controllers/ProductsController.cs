@@ -8,7 +8,7 @@ namespace PRS_bootcamp.Controllers
     public class ProductsController : Controller
     {
         private PRS_bootcampContext db = new PRS_bootcampContext();
-        private const string bind = "Id,VendorId,VendorPartNumber,Name,Price,Unit,Photopath";
+        private const string bind = "Id,VendorId,VendorPartNumber,Name, Description,Price,Unit,Photopath";
 
         public ActionResult Add([Bind(Include = bind)] Product product)
         {

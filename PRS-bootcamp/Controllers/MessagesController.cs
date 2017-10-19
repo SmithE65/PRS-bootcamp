@@ -50,7 +50,7 @@ namespace PRS_bootcamp.Controllers
             if (user == null)
                 return Json(new Msg { Result = "Error", Message = "GetByUser: id invalid." });
 
-            return new JsonNetResult { Data = db.Messages.Where(m => m.ReceiverId == user.Id) };
+            return new JsonNetResult { Data = db.Messages.Where(m => m.Receiver.Id == user.Id) };
         }
 
         public ActionResult List()

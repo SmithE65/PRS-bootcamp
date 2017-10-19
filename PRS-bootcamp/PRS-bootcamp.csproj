@@ -193,6 +193,10 @@
     <Compile Include="Migrations\201710131429175_Products VendorId required.Designer.cs">
       <DependentUpon>201710131429175_Products VendorId required.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710191351277_Message FK test.cs" />
+    <Compile Include="Migrations\201710191351277_Message FK test.Designer.cs">
+      <DependentUpon>201710191351277_Message FK test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Product.cs" />
@@ -283,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710131429175_Products VendorId required.resx">
       <DependentUpon>201710131429175_Products VendorId required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710191351277_Message FK test.resx">
+      <DependentUpon>201710191351277_Message FK test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

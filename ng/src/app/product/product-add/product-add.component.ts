@@ -30,7 +30,7 @@ export class ProductAddComponent implements OnInit {
 
   initProduct(): void
   {
-    this.product = new Product(0, 1, this.vendors[0], '', '', 0, '', '');
+    this.product = new Product(0, 1, this.vendors[0], '', '', '', 0, '', '');
   }
 
   getVendors(): void

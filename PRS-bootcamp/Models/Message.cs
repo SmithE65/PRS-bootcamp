@@ -11,12 +11,12 @@ namespace PRS_bootcamp.Models
         [Required]
         public int Id { get; set; }
 
-        [Required]
-        public int SenderId { get; set; }
+        //[Required]
+        public int? SenderId { get; set; }
         public virtual User Sender { get; set; }
 
-        [Required]
-        public int ReceiverId { get; set; }
+        //[Required]
+        public int? ReceiverId { get; set; }
         public virtual User Receiver { get; set; }
 
         public string Text { get; set; }
@@ -34,6 +34,8 @@ namespace PRS_bootcamp.Models
         public void Copy(Message msg)
         {
             Id = msg.Id;
+            Sender.Copy(msg.Sender);
+            Receiver.Copy(msg.Receiver);
             SenderId = msg.SenderId;
             ReceiverId = msg.ReceiverId;
             Text = msg.Text;

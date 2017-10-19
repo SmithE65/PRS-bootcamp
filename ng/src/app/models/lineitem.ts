@@ -9,16 +9,19 @@ export class PurchaseRequestLineItem
   ProductId: number;
   Product: Product;
   Quantity: number;
+  IsFulfilled: boolean;
 
   constructor(
     id: number,
     requestId: number,
     productId: number,
-    quantity: number
+    quantity: number,
+    fulfilled: boolean
   ) {
     this.Id = id;
     this.PurchaseRequestId = requestId;
     this.ProductId = productId;
     this.Quantity = quantity;
+    this.IsFulfilled = fulfilled;
   }
 }

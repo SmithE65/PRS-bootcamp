@@ -29,16 +29,24 @@ export class ShoppingCartService {
   // adds a product to the cart (creates new LineItem)
   addProduct(product: Product): void
   {
-    //console.log("Adding product:", product);
+    console.log("Adding product:", product);
     if (!this.currentRequest)  // we can't add a product to a cart that doesn't exist
+    {
+      console.log("Adding product: cart does not exist.");
+      this.load();
       return;
-    //console.log("Checking request:", this.currentRequest);
+    }
+    console.log("Checking request:", this.currentRequest, this.checkProduct(product.Id));
     if (!this.checkProduct(product.Id)) // if the product doesn't already exist, add it
     {
-      let item = new PurchaseRequestLineItem(0, this.currentRequest.Id, product.Id, 1);
-      //console.log(item);
+      let item = new PurchaseRequestLineItem(0, this.currentRequest.Id, product.Id, 1, false);
+      console.log(item);
       this.lineItemService.add(item).then(resp => { console.log(resp); this.load() });
-      //console.log("Product added and updated.");
+      console.log("Product added and updated.");
+    }
+    else
+    {
+      console.log("Product already existed.", product);
     }
   }
 
@@ -80,6 +88,7 @@ export class ShoppingCartService {
     // get all requests by user
     this.requestService.getByUser(this.sysService.currentUser.Id).then(resp => this.loadProc(resp));
     this.statusService.list().then(resp => this.status = resp);
+    console.log("Load complete.");
   }
 
   // processes data retreived during load()
@@ -103,6 +112,7 @@ export class ShoppingCartService {
     else {
       this.createRequest();
     }
+    console.log("LoadProc complete.")
   }
 
   // marks current request as REVIEW and creates a new one
@@ -143,8 +153,8 @@ export class ShoppingCartService {
   update(): void
   {
     let cart: Cart = new Cart(this.currentRequest, this.currentItems);    // build a cart
-    this.requestService.updateCart(cart).then(resp => { console.log(resp); this.load() }); // ship it off to the interwebs & drag it right back
-    //console.log("update():", cart);
+    this.requestService.updateCart(cart).then(resp => { console.log("Cart.update():", resp); this.load() }); // ship it off to the interwebs & drag it right back
+    console.log("update():", cart);
     
     //this.total = this.currentRequest.Total;
   }
@@ -173,8 +183,13 @@ export class ShoppingCartService {
         request.Status = s;
       }
     }
+    else
+    {
+      console.log("CartService.status undefined; using default id.");
+    }
 
-    this.requestService.add(request).then(resp => console.log(resp, "New cart created."));
+    // add our request to the db and reload it
+    this.requestService.add(request).then(resp => { console.log(resp, "New cart created."); this.load(); });
   }
 
   // gets the lineitems for the current request

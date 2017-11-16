@@ -10,22 +10,32 @@ namespace PRS_bootcamp.Controllers
         private PRS_bootcampContext db = new PRS_bootcampContext();
         private const string bind = "Id,PurchaseRequestId,ProductId,Quantity,IsFulfilled";
 
+        /// <summary>
+        /// Updates the total column in a purchase request with given id
+        /// </summary>
+        /// <param name="id">PurchaseRequest.Id</param>
+        /// <returns>JSON indicating success or failure</returns>
         public ActionResult UpdateTotal(int? id)
         {
+            // check for valid id
             if (id == null || id <= 0)
             {
                 return Json(new Msg { Result = "Error", Message = "Invalid id." }, JsonRequestBehavior.AllowGet);
             }
 
+            // try to find a request
             var purchaseRequest = db.PurchaseRequests.Find(id);
 
+            // check and see if we got a request
             if (purchaseRequest == null)
             {
                 return Json(new Msg { Result = "Error", Message = $"No PurchaseRequest found for id: {id}" }, JsonRequestBehavior.AllowGet);
             }
 
+            // get all lineitems attached to the purchase request
             var lineItems = db.PurchaseRequestLineItems.Where(p => p.PurchaseRequestId == purchaseRequest.Id).ToList();
 
+            // sum the subtotals for each lineitem
             decimal total = 0;
             foreach (var item in lineItems)
             {
@@ -33,6 +43,7 @@ namespace PRS_bootcamp.Controllers
                 if (item.Product == null)
                     item.Product = db.Products.Find(item.ProductId);
 
+                // if we still don't have a product
                 if (item.Product == null)
                     return Json(new Msg { Result = "Error", Message = "UpdateTotal: invalid ProductId." });
 

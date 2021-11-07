@@ -1,0 +1,73 @@
+<p *ngIf="sysService.currentUser">
+  Welcome {{sysService.currentUser.UserName}}!
+</p>
+<p *ngIf="!sysService.currentUser">
+  Please log in to use the cart.
+</p>
+
+<p *ngIf="cartService.currentRequest">
+  You have a cart!
+</p>
+
+
+<div class="container" *ngIf="cartService.currentRequest">
+  <table>
+    <tr>
+      <th>Id</th>
+      <td>{{cartService.currentRequest.Id}}</td>
+    </tr>
+    <tr>
+      <th>User</th>
+      <td>{{cartService.currentRequest.User?.UserName}}</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td>{{cartService.currentRequest.Total | currency:'USD':true}}</td>
+    </tr>
+  </table>
+  <form>
+    <div class="form-group">
+      <label class="form-control-label" for="edit-desc">Description</label>
+      <input class="form-control" id="edit-desc" type="text" name="Description" [(ngModel)]="cartService.currentRequest.Description" />
+    </div>
+    <div class="form-group">
+      <label class="form-control-label" for="edit-dateneeded">Date Needed</label>
+      <input class="form-control" id="edit-dateneeded" type="date" name="DateNeeded" [(ngModel)]="cartService.currentRequest.DateNeeded" />
+    </div>
+    <button class="btn" type="submit">Button</button>
+  </form>
+</div>
+
+<div class="container">
+  <span *ngIf="cartService.currentItems && !cartService.currentItems.length">No items in cart.</span>
+  <div *ngIf="cartService.currentItems && cartService.currentItems.length">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <td>Product</td>
+          <td>Vendor</td>
+          <td>Unit</td>
+          <td>Price</td>
+          <td>Quantity</td>
+          <td>Subtotal</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartService.currentItems">
+          <td>{{item.Product?.Name}}</td>
+          <td>{{item.Product?.Vendor?.Code}}</td>
+          <td>{{item.Product?.Unit}}</td>
+          <td>{{item.Product?.Price | currency:'USD':true}}</td>
+          <td>
+            <input type="number" name="Quantity" min="1" [(ngModel)]="item.Quantity" />
+            <button class="btn btn-sm" (click)="update()">Update</button>
+            <button class="btn btn-sm btn-danger" (click)="delete(item.Id)">Remove</button>
+          </td>
+          <td>{{item.Quantity * (item.Product?.Price ?? 0) | currency:'USD':true}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn" (click)="submit()">Submit</button>
+  </div>
+</div>
+

@@ -1,0 +1,35 @@
+<p>
+  purchaserequest-list works!
+</p>
+
+<div class="container">
+  <table class="table table-bordered table-striped" *ngIf="requests">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>User</td>
+        <td>Date Needed</td>
+        <td>Delivery Mode</td>
+        <td>Total</td>
+        <td>Status</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of requests">
+        <td>{{request.Id}}</td>
+        <td>{{request.User?.UserName}}</td>
+        <td>{{request.DateNeeded}}</td>
+        <td>{{request.DeliveryMode}}</td>
+        <td>{{request.Total | currency:'USD':true}}</td>
+        <td>{{request.Status?.Description}}</td>
+        <td>
+          <a routerLink="/requests/detail/{{request.Id}}">Detail</a>
+          |
+          <a routerLink="/requests/edit/{{request.Id}}">Edit</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<a routerLink="/requests/add">Create New</a>

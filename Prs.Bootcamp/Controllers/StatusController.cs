@@ -1,7 +1,7 @@
 ﻿namespace Prs.Bootcamp.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class StatusController : ControllerBase
 {
     private readonly PrsDbContext _dbContext;
@@ -11,6 +11,7 @@ public class StatusController : ControllerBase
         _dbContext = dbContext;
     }
 
+    [HttpPost]
     public ActionResult Add(Status status)
     {
         if (ModelState.IsValid)
@@ -23,6 +24,7 @@ public class StatusController : ControllerBase
         return BadRequest(new Msg { Result = "Error", Message = "ModelState invalid" });
     }
 
+    [HttpGet]
     public ActionResult Get(int? id)
     {
         if (id == null)
@@ -40,16 +42,19 @@ public class StatusController : ControllerBase
         return Ok(status);
     }
 
+    [HttpGet]
     public ActionResult GetByDesc(string desc)
     {
         return Ok(_dbContext.Status.Where(s => s.Description == desc).ToList());
     }
 
+    [HttpGet]
     public ActionResult List()
     {
         return Ok(_dbContext.Status.ToList());
     }
 
+    [HttpDelete]
     public ActionResult Remove(int? id)
     {
         if (id == null || id <= 0)
@@ -70,6 +75,7 @@ public class StatusController : ControllerBase
         return Ok(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
     }
 
+    [HttpPost]
     public ActionResult Update(Status status)
     {
         if (status == null)

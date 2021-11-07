@@ -1,7 +1,7 @@
 ﻿namespace Prs.Bootcamp.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class PurchaseRequestsController : ControllerBase
 {
     private readonly PrsDbContext _dbContext;
@@ -22,6 +22,7 @@ public class PurchaseRequestsController : ControllerBase
     /// </summary>
     /// <param name="id">PurchaseRequest Id</param>
     /// <returns>JSON formatted success or error messages.</returns>
+    [HttpPost]
     public ActionResult UpdateTotal(int? id)
     {
         if (id == null || id <= 0)
@@ -55,6 +56,7 @@ public class PurchaseRequestsController : ControllerBase
         return Ok(new Msg { Result = "Success", Message = $"{numChanged} record(s) changed with total: {total}" });
     }
 
+    [HttpPost]
     public ActionResult Add(PurchaseRequest purchaseRequest)
     {
         if (ModelState.IsValid)
@@ -67,6 +69,7 @@ public class PurchaseRequestsController : ControllerBase
         return BadRequest(new Msg { Result = "Error", Message = "ModelState invalid" });
     }
 
+    [HttpGet]
     public ActionResult Get(int? id)
     {
         if (id == null || id <= 0)
@@ -84,6 +87,7 @@ public class PurchaseRequestsController : ControllerBase
         return Ok(purchaseRequest);
     }
 
+    [HttpGet]
     public ActionResult GetCart(int? id)
     {
         if (id == null || id <= 0)
@@ -107,11 +111,13 @@ public class PurchaseRequestsController : ControllerBase
     /// </summary>
     /// <param name="id">Status ID</param>
     /// <returns>List of PurchaseRequest objects</returns>
+    [HttpGet]
     public ActionResult GetByStatus(int? id)
     {
         return Ok(_dbContext.PurchaseRequests.Where(pr => pr.StatusId == id).ToList());
     }
 
+    [HttpGet]
     public ActionResult GetByUser(int? id)
     {
         if (id == null || id <= 0)
@@ -122,6 +128,7 @@ public class PurchaseRequestsController : ControllerBase
         return Ok(_dbContext.PurchaseRequests.Where(r => r.UserId == id).ToList());
     }
 
+    [HttpGet]
     public ActionResult GetItems(int? id)
     {
         if (id == null || id <= 0)
@@ -134,11 +141,13 @@ public class PurchaseRequestsController : ControllerBase
         return Ok(items);
     }
 
+    [HttpGet]
     public ActionResult List()
     {
         return Ok(_dbContext.PurchaseRequests.ToList());
     }
 
+    [HttpDelete]
     public ActionResult Remove(int? id)
     {
         if (id == null || id <= 0)
@@ -159,6 +168,7 @@ public class PurchaseRequestsController : ControllerBase
         return Ok(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
     }
 
+    [HttpPost]
     public ActionResult Update(PurchaseRequest purchaseRequest)
     {
         if (purchaseRequest == null)
@@ -184,6 +194,7 @@ public class PurchaseRequestsController : ControllerBase
         return BadRequest(new Msg { Result = "Error", Message = $"ModelState invalid; {numChanges} record(s) updated." });
     }
 
+    [HttpPost]
     public ActionResult UpdateCart([FromBody] Cart cart)
     {
         if (cart.Request == null)

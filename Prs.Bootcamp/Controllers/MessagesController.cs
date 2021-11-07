@@ -1,7 +1,7 @@
 ﻿namespace Prs.Bootcamp.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class MessagesController : Controller
 {
     private readonly PrsDbContext _dbContext;
@@ -11,6 +11,7 @@ public class MessagesController : Controller
         _dbContext = dbContext;
     }
 
+    [HttpPost]
     public ActionResult Add([FromBody] Message message)
     {
         if (ModelState.IsValid)
@@ -23,6 +24,7 @@ public class MessagesController : Controller
         return BadRequest(new Msg { Result = "Error", Message = "ModelState invalid." });
     }
 
+    [HttpGet]
     public ActionResult Get(int? id)
     {
         if (id == null || id <= 0)
@@ -39,6 +41,7 @@ public class MessagesController : Controller
         return Ok(message);
     }
 
+    [HttpGet]
     public ActionResult GetByUser(int? id)
     {
         if (id == null || id <= 0)
@@ -55,11 +58,13 @@ public class MessagesController : Controller
         return Ok(_dbContext.Messages.Where(m => m.ReceiverNavigation.Id == user.Id));
     }
 
+    [HttpGet]
     public ActionResult List()
     {
         return Ok(_dbContext.Messages.ToList());
     }
 
+    [HttpDelete]
     public ActionResult Remove(int? id)
     {
         if (id == null || id <= 0)
@@ -79,6 +84,7 @@ public class MessagesController : Controller
         return Ok(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
     }
 
+    [HttpPost]
     public ActionResult Update([FromBody] Message message)
     {
         if (message == null)

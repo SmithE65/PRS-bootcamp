@@ -1,7 +1,7 @@
 ﻿namespace Prs.Bootcamp.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class UsersController : ControllerBase
 {
     private readonly PrsDbContext _dbContext;
@@ -11,6 +11,7 @@ public class UsersController : ControllerBase
         _dbContext = dbContext;
     }
 
+    [HttpPost]
     public ActionResult Add(User user)
     {
         if (ModelState.IsValid)
@@ -23,6 +24,7 @@ public class UsersController : ControllerBase
         return BadRequest(new Msg { Result = "Error", Message = "Add: ModelState invalid" });
     }
 
+    [HttpGet]
     public ActionResult Get(int? id)
     {
         if (id == null || id <= 0)
@@ -40,16 +42,19 @@ public class UsersController : ControllerBase
         return Ok(user);
     }
 
+    [HttpGet]
     public ActionResult List()
     {
         return Ok(_dbContext.Users.ToList());
     }
 
+    [HttpPost]
     public ActionResult Login(string UserName, string Password)
     {
         return Ok(_dbContext.Users.Where(u => u.UserName == UserName && u.Password == Password).ToList());
     }
 
+    [HttpDelete]
     public ActionResult Remove(int? id)
     {
         if (id == null || id <= 0)
@@ -70,6 +75,7 @@ public class UsersController : ControllerBase
         return Ok(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
     }
 
+    [HttpPost]
     public ActionResult Update(User user)
     {
         if (user == null)

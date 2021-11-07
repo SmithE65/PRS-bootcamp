@@ -1,7 +1,7 @@
 ﻿namespace Prs.Bootcamp.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class PurchaseRequestLineItemsController : ControllerBase
 {
     private readonly PrsDbContext _dbContext;
@@ -16,6 +16,7 @@ public class PurchaseRequestLineItemsController : ControllerBase
     /// </summary>
     /// <param name="id">PurchaseRequest.Id</param>
     /// <returns>JSON indicating success or failure</returns>
+    [HttpPost]
     public ActionResult UpdateTotal(int? id)
     {
         // check for valid id
@@ -66,6 +67,7 @@ public class PurchaseRequestLineItemsController : ControllerBase
         return Ok(new Msg { Result = "Success", Message = $"{numChanged} record(s) changed with total: {total}" });
     }
 
+    [HttpPost]
     public ActionResult Add(PurchaseRequestLineItem purchaseRequestLineItem)
     {
         if (purchaseRequestLineItem.PurchaseRequestId <= 0 || purchaseRequestLineItem.ProductId <= 0)
@@ -83,6 +85,7 @@ public class PurchaseRequestLineItemsController : ControllerBase
         return BadRequest(new Msg { Result = "Error", Message = "ModelState invalid" });
     }
 
+    [HttpGet]
     public ActionResult Get(int? id)
     {
         if (id == null)
@@ -100,11 +103,13 @@ public class PurchaseRequestLineItemsController : ControllerBase
         return Ok(purchaseRequestLine);
     }
 
+    [HttpGet]
     public ActionResult List()
     {
         return Ok(_dbContext.PurchaseRequestLineItems.ToList());
     }
 
+    [HttpDelete]
     public ActionResult Remove(int? id)
     {
         if (id == null || id <= 0)
@@ -127,6 +132,7 @@ public class PurchaseRequestLineItemsController : ControllerBase
         return Ok(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
     }
 
+    [HttpPost]
     public ActionResult Update(PurchaseRequestLineItem purchaseRequestLineItem)
     {
         if (purchaseRequestLineItem == null)

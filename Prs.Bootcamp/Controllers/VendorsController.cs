@@ -1,7 +1,7 @@
 ﻿namespace Prs.Bootcamp.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 public class VendorsController : ControllerBase
 {
     private readonly PrsDbContext _dbContext;
@@ -11,6 +11,7 @@ public class VendorsController : ControllerBase
         _dbContext = dbContext;
     }
 
+    [HttpPost]
     public ActionResult Add(Vendor vendor)
     {
         if (ModelState.IsValid)
@@ -23,6 +24,7 @@ public class VendorsController : ControllerBase
         return BadRequest(new Msg { Result = "Error", Message = "ModelState invalid" });
     }
 
+    [HttpGet]
     public ActionResult Get(int? id)
     {
         if (id == null)
@@ -40,11 +42,13 @@ public class VendorsController : ControllerBase
         return Ok(vendor);
     }
 
+    [HttpGet]
     public ActionResult List()
     {
         return Ok(_dbContext.Vendors.ToList());
     }
 
+    [HttpDelete]
     public ActionResult Remove(int? id)
     {
         if (id == null || id <= 0)
@@ -65,6 +69,7 @@ public class VendorsController : ControllerBase
         return Ok(new Msg { Result = "Success", Message = $"{numChanges} record(s) removed." });
     }
 
+    [HttpPost]
     public ActionResult Update(Vendor vendor)
     {
         if (vendor == null)

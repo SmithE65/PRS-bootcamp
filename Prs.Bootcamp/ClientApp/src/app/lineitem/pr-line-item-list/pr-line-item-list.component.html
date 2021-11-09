@@ -1,0 +1,29 @@
+<p>
+  pr-line-item-list works!
+</p>
+
+<div class="container">
+  <table class="table table-bordered table-striped" *ngIf="lineitems">
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Request Id</td>
+        <td>Product</td>
+        <td>Quantity</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of lineitems">
+        <td>{{item.Id}}</td>
+        <td>{{item.Request?.Id}}</td>
+        <td>{{item.Product?.Name}}</td>
+        <td>{{item.Quantity}}</td>
+        <td>
+          <a routerLink="detail/{{item.Id}}">Detail</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  Note: To create new line items go to the <a routerLink="/requests">Purchase Requests</a> page, select a request, and add an item from there.
+</div>

@@ -1,0 +1,68 @@
+
+<div class="wrapper">
+  <!-- Sidebar -->
+  <div class="col-sm-2" style="background-color:lightblue;">
+    <form style="padding-bottom:15px; padding-top:15px;">
+      <div class="form-group">
+        <label class="form-control-label" for="searchBox">Test</label>
+        <input class="form-control" id="searchBox" type="text" placeholder="test" />
+      </div>
+
+      <div class="checkbox">
+        <label><input type="checkbox" />Thing 1</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" />Thing 2</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" />Thing 3</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" />Thing 4</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" />Thing 5</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" />Thing 6</label>
+      </div>
+
+      <button class="btn btn-default" type="submit">Filter</button>
+    </form>
+  </div>
+
+  <!-- Products Body -->
+  <div class="col-sm-10" *ngIf="products">
+    <div class="panel panel-primary" *ngFor="let product of products">
+      <div class="panel-heading media">
+
+        <!-- Product Name -->
+        <div class="media-body">
+          <h5><a style="color: white;" routerLink="/products/detail/{{product.Id}}">{{product.Name}}</a></h5>
+        </div>
+
+        <!-- Cart Button -->
+        <div class="media-right">
+          <button class="btn btn-sm media-object" *ngIf="!checkCart(product.Id)" (click)="addToCart(product)">Add to Cart</button>
+          <button class="btn btn-sm btn-success media-object" *ngIf="checkCart(product.Id)" (click)="viewCart()">View Cart</button>
+        </div>
+      </div>
+      <div class="panel-body" style="background-color:lightblue; min-height:30px;">
+        <div class="media">
+          <div class="media-body">
+            <div style="border-bottom:1px solid black;">
+              <span>Price: {{product.Price | currency:'USD':'true'}} {{product.Unit}}, Vendor: {{product.Vendor.Name}}, Part Number: {{product.VendorPartNumber}}</span>
+            </div>
+            <div>
+              <p>{{product.Description}}</p>
+            </div>
+          </div>
+          <div class="media-right">
+            <img src="assets/images/NoImage.png" class="media-object img-thumbnail" width="100" height="100" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

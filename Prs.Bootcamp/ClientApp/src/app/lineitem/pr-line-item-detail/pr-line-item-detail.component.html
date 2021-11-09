@@ -1,0 +1,42 @@
+<p>
+  pr-line-item-detail works!
+</p>
+
+<div class="container" *ngIf="lineitem">
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Id</th>
+      <td>{{lineitem.Id}}</td>
+    </tr>
+    <tr>
+      <th>Request Id</th>
+      <td>{{lineitem.Request?.Id}}</td>
+    </tr>
+    <tr>
+      <th>Request User</th>
+      <td>{{lineitem.Request?.User?.UserName}}</td>
+    </tr>
+    <tr>
+      <th>Product Name</th>
+      <td>{{lineitem.Product?.Name}}</td>
+    </tr>
+    <tr>
+      <th>Unit</th>
+      <td>{{lineitem.Product?.Unit}}</td>
+    </tr>
+    <tr>
+      <th>Price</th>
+      <td>{{lineitem.Product?.Price | currency:'USD':true}}</td>
+    </tr>
+    <tr>
+      <th>Quantity</th>
+      <td>{{lineitem.Quantity}}</td>
+    </tr>
+    <tr>
+      <th>Subtotal</th>
+      <td>{{(lineitem.Quantity ?? 0) * (lineitem.Product?.Price ?? 0) | currency:'USD':true}}</td>
+    </tr>
+  </table>
+  <button class="btn" (click)="edit()">Edit</button>
+  <button class="btn btn-danger" (click)="delete()">Delete</button>
+</div>

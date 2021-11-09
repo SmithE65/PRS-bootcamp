@@ -1,0 +1,31 @@
+<p>
+  review works!
+</p>
+
+<div class="container">
+  <table class="table table-bordered table-striped" *ngIf="reviews">
+    <thead>
+      <tr class="bg-primary">
+        <td>Status</td>
+        <td>User</td>
+        <td>Date Needed</td>
+        <td>Total</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let review of reviews">
+        <td>{{review.Status?.Description}}</td>
+        <td>{{review.User?.UserName}}</td>
+        <td>{{review.DateNeeded |date:'shortDate'}}</td>
+        <td>{{review.Total | currency:'USD':true}}</td>
+        <td *ngIf="review.User?.Id != sysService.currentUser?.Id">
+          <a routerLink="/review/{{review.Id}}">Detail</a>
+        </td>
+        <td class="bg-danger" *ngIf="review.User?.Id == sysService.currentUser?.Id">
+          <span>Cannot review own requests.</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

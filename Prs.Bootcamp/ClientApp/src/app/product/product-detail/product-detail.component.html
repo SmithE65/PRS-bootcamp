@@ -1,0 +1,36 @@
+<p>
+  product-detail works!
+</p>
+
+<div class="container-fluid">
+  <table class="table table-bordered table-striped" *ngIf="product">
+    <tr>
+      <th>Id</th>
+      <td>{{product.Id}}</td>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <td>{{product.Name}}</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>{{product.Description}}</td>
+    </tr>
+    <tr>
+      <th>Vendor</th>
+      <td>{{product.Vendor.Name}}</td>
+    </tr>
+    <tr>
+      <th>Part Number</th>
+      <td>{{product.VendorPartNumber}}</td>
+    </tr>
+    <tr>
+      <th>Unit</th>
+      <td>{{product.Unit}}</td>
+    </tr>
+    <tr>
+      <th>Price</th>
+      <td>{{product.Price | currency:'USD':true}}</td>
+    </tr>
+  </table>
+</div>

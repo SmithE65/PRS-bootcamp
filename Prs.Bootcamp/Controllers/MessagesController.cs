@@ -55,7 +55,7 @@ public class MessagesController : Controller
             return BadRequest(new Msg { Result = "Error", Message = "GetByUser: id invalid." });
         }
 
-        return Ok(_dbContext.Messages.Where(m => m.ReceiverNavigation.Id == user.Id));
+        return Ok(_dbContext.Messages.Where(m => m.ReceiverNavigation!.Id == user.Id));
     }
 
     [HttpGet]

@@ -38,13 +38,7 @@ public class PurchaseRequestsController : ControllerBase
         }
 
         var lineItems = _dbContext.PurchaseRequestLineItems.Where(p => p.PurchaseRequestId == purchaseRequest.Id).ToList();
-
-        decimal total = 0;
-        foreach (var item in lineItems)
-        {
-            total += item.ProductNavigation.Price * item.Quantity;
-        }
-        purchaseRequest.Total = total;
+        purchaseRequest.Total = lineItems.Sum(x => x.ProductNavigation?.Price * x.Quantity ?? -1);
 
         int numChanged = 0;
         if (ModelState.IsValid)
@@ -53,7 +47,7 @@ public class PurchaseRequestsController : ControllerBase
             numChanged = _dbContext.SaveChanges();
         }
 
-        return Ok(new Msg { Result = "Success", Message = $"{numChanged} record(s) changed with total: {total}" });
+        return Ok(new Msg { Result = "Success", Message = $"{numChanged} record(s) changed with total: {purchaseRequest.Total}" });
     }
 
     [HttpPost]
@@ -213,10 +207,9 @@ public class PurchaseRequestsController : ControllerBase
 
         if (cart.LineItems != null)
         {
-            PurchaseRequestLineItem item = null;
             foreach (PurchaseRequestLineItem li in cart.LineItems)
             {
-                item = _dbContext.PurchaseRequestLineItems.Find(li.Id);
+                var item = _dbContext.PurchaseRequestLineItems.Find(li.Id);
                 if (item == null)
                 {
                     _dbContext.PurchaseRequestLineItems.Add(li);
@@ -228,10 +221,9 @@ public class PurchaseRequestsController : ControllerBase
             }
         }
 
-        int numChanges = 0;
         if (ModelState.IsValid)
         {
-            numChanges = _dbContext.SaveChanges();
+            var numChanges = _dbContext.SaveChanges();
             UpdateTotal(pr.Id);
             return Ok(new Msg { Result = "Success", Message = $"Cart: {numChanges} items updated." });
         }

@@ -1,4 +1,9 @@
-﻿namespace Prs.Bootcamp.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
+using Prs.Bootcamp.Data;
+using Prs.Bootcamp.Data.Models;
+using Prs.Bootcamp.Models;
+
+namespace Prs.Bootcamp.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]

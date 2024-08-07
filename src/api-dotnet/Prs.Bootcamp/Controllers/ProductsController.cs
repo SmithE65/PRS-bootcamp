@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Prs.Bootcamp.Data;
 using Prs.Bootcamp.Data.Models;
 using Prs.Bootcamp.Models;
 
 namespace Prs.Bootcamp.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class ProductsController : ControllerBase

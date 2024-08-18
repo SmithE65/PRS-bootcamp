@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Prs.Bootcamp.Data;
-using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,31 +11,32 @@ builder.Services.AddDbContext<PrsDbContext>(opt =>
     var connectionString = builder.Configuration.GetConnectionString("PrsDbConnection")
         ?? throw new InvalidOperationException("Missing connection string 'PrsDbConnection' in appsettings.json");
 
-    _ = opt.UseSqlServer(connectionString,
-        sqlOpts =>
-        {
-            _ = sqlOpts.EnableRetryOnFailure();
-            _ = sqlOpts.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery);
-        });
+    _ = opt.UseNpgsql(connectionString, options =>
+    {
+        _ = options.EnableRetryOnFailure();
+    });
 });
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "http://localhost:8080/auth/realms/bootcamp";
-        options.MetadataAddress = "http://localhost:8080/auth/realms/bootcamp/.well-known/openid-configuration";
+        options.Authority = "http://localhost:8080/realms/bootcamp";
+        options.Audience = "prs-api";
         options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new()
+
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-            NameClaimType = ClaimTypes.Name,
-            RoleClaimType = ClaimTypes.Role,
             ValidateIssuer = true,
-            ValidIssuers = ["http://localhost:8080/auth/realms/bootcamp"],
+            ValidIssuer = "http://localhost:8080/realms/bootcamp",
             ValidateAudience = true,
-            ValidAudiences = ["bootcamp-api"]
+            ValidAudience = "prs-api",
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
         };
     });
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 
@@ -42,20 +44,63 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "PrsApi", Version = "v1" });
+
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.OAuth2,
+        Flows = new OpenApiOAuthFlows
+        {
+            AuthorizationCode = new OpenApiOAuthFlow
+            {
+                AuthorizationUrl = new Uri("http://localhost:8080/realms/bootcamp/protocol/openid-connect/auth"),
+                TokenUrl = new Uri("http://localhost:8080/realms/bootcamp/protocol/openid-connect/token"),
+                Scopes = new Dictionary<string, string>
+                {
+                    { "openid", "OpenID Connect scope" },
+                    { "profile", "Profile scope" },
+                    { "email", "Email scope" }
+                }
+            }
+        }
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "oauth2"
+                }
+            },
+            ["openid", "profile", "email"]
+        }
+    });
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    _ = app
+        .UseSwagger()
+        .UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "PrsApi v1");
+            c.OAuthClientId("prs-spa");
+            c.OAuthAppName("PRS React");
+            c.OAuthUsePkce();
+        });
+}
+else
+{
     _ = app.UseHsts();
 }
 
-app.UseSwagger()
-    .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PrsApi v1"))
-    .UseHttpsRedirection()
+_ = app.UseHttpsRedirection()
+    .UseAuthentication()
     .UseAuthorization();
 
 app.MapControllers();

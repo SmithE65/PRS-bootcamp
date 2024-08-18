@@ -10,30 +10,27 @@ public class Product
     public int Id { get; set; }
 
     [Required]
-    public int VendorId { get; set; }
-    public Vendor? VendorNavigation { get; set; }
-
-    [Required]
-    [StringLength(50)]
+    [StringLength(30)]
     public string VendorPartNumber { get; set; } = null!;
 
     [Required]
-    [StringLength(50)]
+    [StringLength(30)]
     public string Name { get; set; } = null!;
 
     [Required]
-    public string Description { get; set; } = null!;
-
-    [Required]
-    [Column(TypeName = "DECIMAL(19,4)")]
+    [Column(TypeName = "DECIMAL(11,2)")]
     public decimal Price { get; set; }
 
     [Required]
-    [StringLength(50)]
+    [StringLength(30)]
     public string Unit { get; set; } = null!;
 
-    [StringLength(50)]
-    public string Photopath { get; set; } = null!;
+    [StringLength(255)]
+    public string? Photopath { get; set; }
+
+    [Required]
+    public int VendorId { get; set; }
+    public Vendor? VendorNavigation { get; set; }
 
     public void Copy(Product product)
     {
@@ -42,7 +39,6 @@ public class Product
         VendorNavigation = product.VendorNavigation;
         VendorPartNumber = product.VendorPartNumber;
         Name = product.Name;
-        Description = product.Description;
         Price = product.Price;
         Unit = product.Unit;
         Photopath = product.Photopath;

@@ -8,29 +8,27 @@ public class User
 {
     public int Id { get; set; }
 
-    [StringLength(20)]
+    [StringLength(30)]
     [Required]
     public string UserName { get; set; } = null!;
 
-    [StringLength(10)]
+    [StringLength(30)]
     [Required]
     public string Password { get; set; } = null!;
 
-    [StringLength(20)]
+    [StringLength(30)]
     [Required]
     public string FirstName { get; set; } = null!;
 
-    [StringLength(20)]
+    [StringLength(30)]
     [Required]
     public string LastName { get; set; } = null!;
 
     [StringLength(12)]
-    [Required]
-    public string Phone { get; set; } = null!;
+    public string? Phone { get; set; }
 
-    [StringLength(75)]
-    [Required]
-    public string Email { get; set; } = null!;
+    [StringLength(255)]
+    public string? Email { get; set; }
 
     [Required]
     public bool IsAdmin { get; set; }

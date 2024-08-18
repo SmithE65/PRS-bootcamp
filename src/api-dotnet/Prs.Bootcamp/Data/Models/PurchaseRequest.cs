@@ -8,33 +8,34 @@ public class PurchaseRequest
     [Key]
     public int Id { get; set; }
 
-    public int UserId { get; set; }
-    public User? UserNavigation { get; set; }
-
     [Required]
-    [StringLength(100)]
+    [StringLength(80)]
     public string Description { get; set; } = null!;
 
     [Required]
-    [StringLength(255)]
+    [StringLength(80)]
     public string Justification { get; set; } = null!;
+
+    [StringLength(80)]
+    public string ReasonForRejection { get; set; } = string.Empty;
 
     public DateTime DateNeeded { get; set; }
 
     [Required]
-    [StringLength(25)]
+    [StringLength(20)]
     public string DeliveryMode { get; set; } = null!;
 
-    public int StatusId { get; set; }
-    public Status? StatusNavigation { get; set; }
+    [Required]
+    [StringLength(10)]
+    public string Status { get; set; } = null!;
 
-    [Column(TypeName = "DECIMAL(19,4)")]
+    [Column(TypeName = "DECIMAL(11,2)")]
     public decimal Total { get; set; }
 
     public DateTime SubmittedDate { get; set; }
 
-    [StringLength(100)]
-    public string ReasonForRejection { get; set; } = string.Empty;
+    public int UserId { get; set; }
+    public User? UserNavigation { get; set; }
 
     public void Copy(PurchaseRequest purchaseRequest)
     {
@@ -44,7 +45,7 @@ public class PurchaseRequest
         Justification = purchaseRequest.Justification;
         DateNeeded = purchaseRequest.DateNeeded;
         DeliveryMode = purchaseRequest.DeliveryMode;
-        StatusId = purchaseRequest.StatusId;
+        Status = purchaseRequest.Status;
         Total = purchaseRequest.Total;
         SubmittedDate = purchaseRequest.SubmittedDate;
         ReasonForRejection = purchaseRequest.ReasonForRejection;

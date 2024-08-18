@@ -1,6 +1,11 @@
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:25.0.2
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1024M
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
@@ -11,13 +16,17 @@ services:
       KC_DB_PASSWORD: password
     ports:
       - 8080:8080
-      - 8443:8443
     command: start-dev
     depends_on:
       - keycloak-postgres
 
   keycloak-postgres:
     image: postgres:15
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1024M
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -27,5 +36,25 @@ services:
     volumes:
       - keycloak-postgres:/var/lib/postgresql/data
 
+  prs-postgres:
+    image: postgres:15
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1024M
+    environment:
+      POSTGRES_DB: app_db
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: app_password
+    ports:
+      - 5433:5432
+    volumes:
+      - app-postgres:/var/lib/postgresql/data
+      - ./src/db:/docker-entrypoint-initdb.d
+    depends_on:
+      - keycloak-postgres
+
 volumes:
   keycloak-postgres:
+  app-postgres:

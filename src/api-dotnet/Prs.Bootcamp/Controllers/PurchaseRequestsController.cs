@@ -111,9 +111,9 @@ public class PurchaseRequestsController : ControllerBase
     /// <param name="id">Status ID</param>
     /// <returns>List of PurchaseRequest objects</returns>
     [HttpGet]
-    public ActionResult GetByStatus(int? id)
+    public ActionResult GetByStatus(string? id)
     {
-        return Ok(_dbContext.PurchaseRequests.Where(pr => pr.StatusId == id).ToList());
+        return Ok(_dbContext.PurchaseRequests.Where(pr => pr.Status == id).ToList());
     }
 
     [HttpGet]
@@ -207,7 +207,6 @@ public class PurchaseRequestsController : ControllerBase
             return BadRequest(new Msg { Result = "Error", Message = "Cart: invalid Id." });
         }
         pr.Copy(cart.Request);
-        pr.StatusNavigation = null;
         pr.UserNavigation = null;
 
         if (cart.LineItems != null)

@@ -18,15 +18,11 @@ public class PurchaseRequestLineItem
     [Required]
     public int Quantity { get; set; }
 
-    [Required]
-    public bool IsFulfilled { get; set; }
-
     public void Copy(PurchaseRequestLineItem lineItem)
     {
         Id = lineItem.Id;
         PurchaseRequestId = lineItem.PurchaseRequestId;
         ProductId = lineItem.ProductId;
         Quantity = lineItem.Quantity;
-        IsFulfilled = lineItem.IsFulfilled;
     }
 }

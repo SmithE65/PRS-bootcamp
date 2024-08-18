@@ -9,19 +9,19 @@ public class Vendor
     public int Id { get; set; }
 
     [Required]
-    [StringLength(10)]
+    [StringLength(30)]
     public string Code { get; set; } = null!;
 
     [Required]
-    [StringLength(255)]
+    [StringLength(30)]
     public string Name { get; set; } = null!;
 
     [Required]
-    [StringLength(255)]
+    [StringLength(30)]
     public string Address { get; set; } = null!;
 
     [Required]
-    [StringLength(255)]
+    [StringLength(30)]
     public string City { get; set; } = null!;
 
     [Required]
@@ -34,13 +34,11 @@ public class Vendor
 
     [Required]
     [StringLength(12)]
-    public string Phone { get; set; } = null!;
+    public string? Phone { get; set; }
 
     [Required]
-    [StringLength(100)]
-    public string Email { get; set; } = null!;
-
-    public bool IsPreapproved { get; set; }
+    [StringLength(255)]
+    public string? Email { get; set; }
 
     public void Copy(Vendor vendor)
     {
@@ -52,6 +50,5 @@ public class Vendor
         Zip = vendor.Zip;
         Phone = vendor.Phone;
         Email = vendor.Email;
-        IsPreapproved = vendor.IsPreapproved;
     }
 }

@@ -3,13 +3,8 @@ using Prs.Bootcamp.Data.Models;
 
 namespace Prs.Bootcamp.Data;
 
-public class PrsDbContext : DbContext
+public class PrsDbContext(DbContextOptions options) : DbContext(options)
 {
-    public PrsDbContext(DbContextOptions options) : base(options)
-    {
-    }
-
-    public DbSet<Message> Messages => Set<Message>();
     public DbSet<Product> Products => Set<Product>();
     public DbSet<PurchaseRequest> PurchaseRequests => Set<PurchaseRequest>();
     public DbSet<PurchaseRequestLineItem> PurchaseRequestLineItems => Set<PurchaseRequestLineItem>();

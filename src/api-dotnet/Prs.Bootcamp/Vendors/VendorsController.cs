@@ -35,7 +35,6 @@ public class VendorsController(PrsDbContext context) : ControllerBase
     }
 
     // PUT: api/Vendors/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutVendor(int id, Vendor vendor)
     {
@@ -66,12 +65,23 @@ public class VendorsController(PrsDbContext context) : ControllerBase
     }
 
     // POST: api/Vendors
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<Vendor>> PostVendor(Vendor vendor)
+    public async Task<ActionResult<Vendor>> PostVendor(CreateVendorDto dto)
     {
-        _context.Vendors.Add(vendor);
-        await _context.SaveChangesAsync();
+        var vendor = new Vendor
+        {
+            Code = dto.Code,
+            Name = dto.Name,
+            Address = dto.Address,
+            City = dto.City,
+            State = dto.State,
+            Zip = dto.Zip,
+            Phone = dto.Phone,
+            Email = dto.Email
+        };
+
+        _ = _context.Vendors.Add(vendor);
+        _ = await _context.SaveChangesAsync();
 
         return CreatedAtAction("GetVendor", new { id = vendor.Id }, vendor);
     }
@@ -81,13 +91,12 @@ public class VendorsController(PrsDbContext context) : ControllerBase
     public async Task<IActionResult> DeleteVendor(int id)
     {
         var vendor = await _context.Vendors.FindAsync(id);
-        if (vendor == null)
-        {
-            return NotFound();
-        }
 
-        _context.Vendors.Remove(vendor);
-        await _context.SaveChangesAsync();
+        if (vendor != null)
+        {
+            _ = _context.Vendors.Remove(vendor);
+            _ = await _context.SaveChangesAsync();
+        }
 
         return NoContent();
     }

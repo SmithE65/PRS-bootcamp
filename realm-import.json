@@ -56,7 +56,23 @@
       "clientId": "prs-api",
       "enabled": true,
       "bearerOnly": true
-    }
+    },
+	{
+	  "clientId": "cli-test-client",
+	  "name": "CLI Test Client",
+	  "description": "Client for local CLI testing (PowerShell, curl, Postman, etc.)",
+	  "enabled": true,
+	  "publicClient": true,
+	  "directAccessGrantsEnabled": true,
+	  "standardFlowEnabled": false,
+	  "implicitFlowEnabled": false,
+	  "serviceAccountsEnabled": false,
+	  "bearerOnly": false,
+	  "protocol": "openid-connect",
+	  "redirectUris": [],
+	  "webOrigins": [],
+	  "fullScopeAllowed": true
+	}
   ],
   "users": [
     {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/PurchaseRequests")
+@RequestMapping("/api/purchase-requests")
 public class PurchaseRequestController {
 
     private final PurchaseRequestRepository purchaseRequestRepository;

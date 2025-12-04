@@ -1,0 +1,27 @@
+:root {
+	--app-sidenav-width: 200px;
+}
+
+.app-sidenav-container {
+	height: 100vh;
+}
+
+.app-sidenav {
+	width: var(--app-sidenav-width);
+}
+
+.app-menu-button {
+	margin-right: 8px;
+}
+
+.app-title {
+	font-weight: 600;
+}
+
+.app-toolbar-spacer {
+	flex: 1 1 auto;
+}
+
+.app-content {
+	padding: 16px;
+}

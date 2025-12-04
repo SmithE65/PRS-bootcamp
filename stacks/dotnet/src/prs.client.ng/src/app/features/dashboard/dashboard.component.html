@@ -1,0 +1,5 @@
+<section class="content">
+    <h2>Welcome to the Dashboard</h2>
+    <p *ngIf="auth.isLoggedIn()">You are signed in.</p>
+    <pre *ngIf="auth.getIdentityClaims()">{{ auth.getIdentityClaims() | json }}</pre>
+</section>

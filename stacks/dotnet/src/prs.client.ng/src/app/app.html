@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <span class="app-title">{{ title() }}</span>
+  <span class="app-toolbar-spacer"></span>
+
+  @if (auth.isLoggedIn()) {
+  <button mat-button [matMenuTriggerFor]="userMenu">{{ userName }}</button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="onSignOut()">Sign out</button>
+  </mat-menu>
+  }
+  @else {
+  <button mat-button color="accent" (click)="onSignIn()">Sign in</button>
+  }
+</mat-toolbar>
+
+<div class="app-content">
+  <router-outlet></router-outlet>
+</div>

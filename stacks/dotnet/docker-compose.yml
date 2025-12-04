@@ -1,0 +1,69 @@
+services:
+  keycloak:
+    # Image can be overridden via the .env file
+    image: ${KEYCLOAK_IMAGE:-quay.io/keycloak/keycloak:25.0.2}
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1024M
+    environment:
+      # Admin user - set these in your local .env (do NOT commit secrets)
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+
+      # Database connection for Keycloak (values configurable via .env)
+      KC_DB: ${KEYCLOAK_DB:-postgres}
+      KC_DB_URL: jdbc:postgresql://keycloak-postgres:${KEYCLOAK_DB_PORT:-5432}/${KEYCLOAK_DB_NAME:-keycloak}
+      KC_DB_USER: ${KEYCLOAK_DB_USER}
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+    ports:
+      - 8080:8080
+    command: start-dev
+    depends_on:
+      - keycloak-postgres
+
+  keycloak-postgres:
+    image: postgres:15
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1024M
+    environment:
+      POSTGRES_DB: ${KEYCLOAK_DB_NAME:-keycloak}
+      POSTGRES_USER: ${KEYCLOAK_DB_USER:-keycloak}
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+    ports:
+      - 5432:5432
+    volumes:
+      - keycloak-postgres:/var/lib/postgresql/data
+
+  prs-sql:
+    image: ${PRS_SQL_IMAGE:-mcr.microsoft.com/mssql/server:2019-latest}
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1024M
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: ${PRS_SQL_PID:-Developer}
+      SA_PASSWORD: ${PRS_SQL_SA_PASSWORD}
+    ports:
+      - ${PRS_SQL_PORT:-1433}:1433
+    volumes:
+      - prs-sql-data:/var/opt/mssql
+      - ./src/db:/docker-entrypoint-initdb.d
+    depends_on:
+      - keycloak-postgres
+
+volumes:
+  keycloak-postgres:
+  prs-sql-data:

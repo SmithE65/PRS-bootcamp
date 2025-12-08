@@ -1,17 +1,18 @@
 :root {
-	--app-sidenav-width: 200px;
+	--app-sidenav-width: 240px;
 }
 
-.app-sidenav-container {
+.app-shell {
 	height: 100vh;
 }
 
-.app-sidenav {
-	width: var(--app-sidenav-width);
+mat-sidenav {
+	width: 240px;
 }
 
 .app-menu-button {
 	margin-right: 8px;
+	display: none;
 }
 
 .app-title {
@@ -24,4 +25,7 @@
 
 .app-content {
 	padding: 16px;
+	box-sizing: border-box;
+	height: calc(100vh - 64px);
+	overflow: auto;
 }

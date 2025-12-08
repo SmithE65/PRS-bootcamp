@@ -1,18 +1,44 @@
-<mat-toolbar color="primary">
-  <span class="app-title">{{ title() }}</span>
-  <span class="app-toolbar-spacer"></span>
+<div class="app-root">
+  <mat-toolbar color="primary">
+    <button matIconButton (click)="toggleSidenav()" aria-label="Open navigation menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
+    @if (isHandset) {
+      <span class="app-title">{{ shortTitle() }}</span>
+    }
+    @else {
+      <span class="app-title">{{ title() }}</span>
+    }
 
-  @if (isLoggedIn$) {
-  <button mat-button [matMenuTriggerFor]="userMenu">{{ userName }}</button>
-  <mat-menu #userMenu="matMenu">
-    <button mat-menu-item (click)="onSignOut()">Sign out</button>
-  </mat-menu>
-  }
-  @else {
-  <button mat-button color="accent" (click)="onSignIn()">Sign in</button>
-  }
-</mat-toolbar>
+    <span class="app-toolbar-spacer"></span>
 
-<div class="app-content">
-  <router-outlet></router-outlet>
+    @if (isLoggedIn()) {
+    <button mat-button [matMenuTriggerFor]="userMenu">{{ userName }}</button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="onSignOut()">Sign out</button>
+    </mat-menu>
+    }
+    @else {
+    <button mat-button color="accent" (click)="onSignIn()">Sign in</button>
+    }
+  </mat-toolbar>
+
+  <mat-sidenav-container class="app-shell">
+  <mat-sidenav #sidenav [mode]="isHandset ? 'over' : 'side'" [opened]="sidenavOpened">
+    <mat-nav-list role="navigation">
+      <a mat-list-item routerLink="/requests" (click)="closeIfHandset()">Requests</a>
+      <a mat-list-item routerLink="/reviews" (click)="closeIfHandset()">Reviews</a>
+      <a mat-list-item routerLink="/vendors" (click)="closeIfHandset()">Vendors</a>
+      <a mat-list-item routerLink="/products" (click)="closeIfHandset()">Products</a>
+      <a mat-list-item routerLink="/settings" (click)="closeIfHandset()">Settings</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="app-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 </div>

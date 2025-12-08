@@ -1,6 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Prs.Bff.Api.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var authSettings = new AuthenticationOptions();
+
+builder.Configuration
+    .GetSection(AuthenticationOptions.Authentication)
+    .Bind(authSettings);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

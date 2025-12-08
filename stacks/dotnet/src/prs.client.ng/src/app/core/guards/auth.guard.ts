@@ -1,18 +1,24 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { inject, Injectable } from '@angular/core';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { Observable, take } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+  private readonly auth = inject(OidcSecurityService);
+  private readonly router = inject(Router);
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.auth.isLoggedIn()) {
-      return true;
-    }
-    // store intended URL and start login flow
-    // this.auth.login(state.url);
-    this.router.navigateByUrl('/login');
-    return false;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    return this.auth.isAuthenticated$.pipe(
+      take(1),
+      map(({ isAuthenticated }) => {
+        if (isAuthenticated) {
+          return true;
+        }
+
+        return this.router.parseUrl('/login');
+      })
+    )
   }
 }

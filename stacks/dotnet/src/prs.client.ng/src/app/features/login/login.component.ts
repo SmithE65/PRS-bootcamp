@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { AuthService } from '../../core/services/auth.service';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'prs-login',
@@ -13,5 +13,10 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(public auth: AuthService) {}
+  private readonly auth = inject(OidcSecurityService);
+  constructor() {}
+
+  login(): void {
+    this.auth.authorize();
+  }
 }

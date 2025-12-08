@@ -2,7 +2,7 @@
   <span class="app-title">{{ title() }}</span>
   <span class="app-toolbar-spacer"></span>
 
-  @if (auth.isLoggedIn()) {
+  @if (isLoggedIn$) {
   <button mat-button [matMenuTriggerFor]="userMenu">{{ userName }}</button>
   <mat-menu #userMenu="matMenu">
     <button mat-menu-item (click)="onSignOut()">Sign out</button>

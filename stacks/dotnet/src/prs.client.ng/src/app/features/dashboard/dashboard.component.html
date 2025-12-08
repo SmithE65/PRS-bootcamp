@@ -1,5 +1,17 @@
 <section class="content">
     <h2>Welcome to the Dashboard</h2>
-    <p *ngIf="auth.isLoggedIn()">You are signed in.</p>
-    <pre *ngIf="auth.getIdentityClaims()">{{ auth.getIdentityClaims() | json }}</pre>
+    
+    @if (forecasts().length > 0) {
+        @for (forecast of forecasts(); track $index) {
+            <div class="forecast-item">
+            <div class="date">{{ forecast.date | date:'mediumDate' }}</div>
+            <div class="temps">{{ forecast.temperatureC }} °C</div>
+            <div class="summary">{{ forecast.summary }}</div>
+          </div>
+        }
+    }
+    @else {
+        <div class="loading">Loading forecasts...</div>
+    }
+
 </section>

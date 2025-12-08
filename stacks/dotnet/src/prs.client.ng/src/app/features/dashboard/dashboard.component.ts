@@ -1,18 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { AuthService } from '../../core/services/auth.service';
-import { HttpClient } from '@angular/common/http';
-import { combineLatest, Observable } from 'rxjs';
-
-type Forecast = {
-  date: string;
-  temperatureC: number;
-  summary: string | null;
-}
+import { WeatherService } from './weather.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'prs-dashboard',
@@ -21,18 +14,7 @@ type Forecast = {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit {
-  forecasts: Forecast[] = [];
-
-  constructor(public auth: AuthService, private readonly http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.getWeather().subscribe((forecasts) => {
-      this.forecasts = forecasts
-    })
-  }
-
-  getWeather(): Observable<Forecast[]> {
-    return this.http.get<Forecast[]>('/api/weatherforecast');
-  }
+export class DashboardComponent {
+  private readonly weatherService = inject(WeatherService);
+  forecasts = toSignal(this.weatherService.getForecasts(), {initialValue: []});
 }
